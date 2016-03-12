@@ -7,6 +7,7 @@
 * react
 * react-redux
 * immutable
+* redux
 * redux-immutablejs
 * react-immutable-proptypes
 * redux-thunk
