@@ -1,13 +1,13 @@
-import { connect } from 'react-redux';
-import resolve from './resolveStoreProps';
+import { connect } from 'react-redux'
+import resolve from './resolveStoreProps'
 
 const mapStateToProps = (storeProps) => (storeState, ownProps) =>
-  resolve(storeProps, storeState, ownProps);
+  resolve(storeProps, storeState, ownProps)
 
 const options = {
   pure: true,
   withRef: true
-};
+}
 
 export default (storeProps) => {
   const connector = connect(
@@ -15,9 +15,9 @@ export default (storeProps) => {
     null,
     null,
     options
-  );
+  )
   return (Component) => {
-    Component.storeProps = storeProps;
-    return connector(Component);
-  };
-};
+    Component.storeProps = storeProps
+    return connector(Component)
+  }
+}
