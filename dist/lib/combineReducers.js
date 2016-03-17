@@ -8,7 +8,7 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-var _reduxImmutablejs = require('redux-immutablejs');
+var _reduxImmutablejs = require('@tvevt/redux-immutablejs');
 
 var _lodash = require('lodash.map');
 

@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux-immutablejs'
+import { combineReducers } from '@tvevt/redux-immutablejs'
 import map from 'lodash.map'
 import reduceReducers from 'reduce-reducers'
 

@@ -1,8 +1,8 @@
 {
-  "name": "tango",
+  "name": "@tvevt/tango",
   "version": "1.0.0",
   "description": "Toolkit for building redux/react applications",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://bitbucket.org/Graf009/tango.git"
@@ -11,14 +11,15 @@
   "license": "MIT",
   "scripts": {
     "preversion": "npm run clean && npm run build",
-    "build": "babel src --out-dir lib",
-    "clean": "rimraf lib",
+    "build": "babel src --out-dir dist",
+    "clean": "rimraf dist",
     "lint": "eslint src"
   },
   "peerDependencies": {
     "react": "^0.14.0"
   },
   "dependencies": {
+    "@tvevt/redux-immutablejs": "^0.1.0",
     "babel-runtime": "^6.6.1",
     "immutable": "^3.7.6",
     "lodash.filter": "^4.2.1",
@@ -32,12 +33,10 @@
     "reduce-reducers": "^0.1.2",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
-    "redux-immutablejs": "^0.1.0",
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
-    "babel-core": "^6.7.2",
     "babel-eslint": "^6.0.0-beta.6",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-transform-runtime": "^6.6.0",

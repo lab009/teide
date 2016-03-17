@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install tango --save
+npm install @tvevt/tango --save
 ```
 
 ## Core Ideals
