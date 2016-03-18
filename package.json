@@ -28,7 +28,7 @@
     "lodash.mapvalues": "^4.2.0",
     "lodash.reduce": "^4.2.0",
     "lodash.values": "^4.1.0",
-    "react-immutable-proptypes": "1.6.0",
+    "react-immutable-proptypes": "^1.7.0",
     "react-redux": "^4.4.1",
     "reduce-reducers": "^0.1.2",
     "redux": "^3.3.1",

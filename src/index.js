@@ -22,8 +22,8 @@ class TangoComponent extends ReactComponent {
 }
 
 const PropTypes = {
-  ...RPropTypes,
-  ...IPropTypes
+  ...IPropTypes,
+  ...RPropTypes
 }
 
 export {
