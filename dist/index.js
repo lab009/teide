@@ -67,9 +67,15 @@ var TangoComponent = function (_ReactComponent) {
   (0, _inherits3.default)(TangoComponent, _ReactComponent);
 
   function TangoComponent() {
+    var _Object$getPrototypeO;
+
     (0, _classCallCheck3.default)(this, TangoComponent);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(TangoComponent).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (_Object$getPrototypeO = (0, _getPrototypeOf2.default)(TangoComponent)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
     _this.state = (0, _extends3.default)({}, _this.constructor.defaultState, _this.state);
     (0, _bindClass2.default)(_this);

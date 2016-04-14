@@ -14,7 +14,7 @@ exports.default = function (context) {
   return (0, _getOwnPropertyNames2.default)(context.constructor.prototype).filter(function (method) {
     return typeof context[method] === 'function' && method !== 'constructor';
   }).forEach(function (method) {
-    return context[method] = context[method].bind(context);
+    context[method] = context[method].bind(context);
   });
 };
 
