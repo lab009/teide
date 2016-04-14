@@ -11,8 +11,8 @@ import combineReducers from './lib/combineReducers'
 
 class TangoComponent extends ReactComponent {
   static defaultState = {};
-  constructor() {
-    super(...arguments)
+  constructor(...args) {
+    super(...args)
     this.state = {
       ...this.constructor.defaultState,
       ...this.state

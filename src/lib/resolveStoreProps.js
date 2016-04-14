@@ -17,5 +17,5 @@ const lookup = (o, k, args) => {
 // and return the same object, but where the values are the resolved data
 export default (storeProps, storeState, props) =>
   mapValues(storeProps, (v) =>
-    lookup(storeState, v, [ storeState, props ])
+    lookup(storeState, v, [storeState, props])
   )
