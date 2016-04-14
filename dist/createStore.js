@@ -20,6 +20,10 @@ var _lodash = require('lodash.foreach');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _reduxBatchedSubscribe = require('redux-batched-subscribe');
+
+var _reactDom = require('react-dom');
+
 var _combineReducers = require('./lib/combineReducers');
 
 var _combineReducers2 = _interopRequireDefault(_combineReducers);
@@ -36,6 +40,7 @@ var identity = function identity(v) {
 
 var devtools = typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension() : identity;
 
+var defaultEnhancers = [(0, _reduxBatchedSubscribe.batchedSubscribe)(_reactDom.unstable_batchedUpdates)];
 var defaultMiddleware = [_reduxThunk2.default];
 
 exports.default = function (_ref) {
@@ -61,7 +66,7 @@ exports.default = function (_ref) {
   var pluginValues = (0, _transformPlugins2.default)(plugins);
   var finalReducers = [].concat((0, _toConsumableArray3.default)(reducers), (0, _toConsumableArray3.default)(pluginValues.reducers));
   var finalMiddleware = [].concat(defaultMiddleware, (0, _toConsumableArray3.default)(middleware), (0, _toConsumableArray3.default)(pluginValues.middleware));
-  var finalEnhancers = [].concat((0, _toConsumableArray3.default)(enhancers), (0, _toConsumableArray3.default)(pluginValues.enhancers), [devtools]);
+  var finalEnhancers = [].concat(defaultEnhancers, (0, _toConsumableArray3.default)(enhancers), (0, _toConsumableArray3.default)(pluginValues.enhancers), [devtools]);
   var finalHooks = [].concat((0, _toConsumableArray3.default)(hooks), (0, _toConsumableArray3.default)(pluginValues.hooks));
 
   var store = (0, _redux.createStore)(_combineReducers2.default.apply(undefined, (0, _toConsumableArray3.default)(finalReducers)), initialState, _redux.compose.apply(undefined, [_redux.applyMiddleware.apply(undefined, (0, _toConsumableArray3.default)(finalMiddleware))].concat((0, _toConsumableArray3.default)(finalEnhancers))));
