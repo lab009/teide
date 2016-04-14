@@ -1,12 +1,16 @@
-# tango
+# @eagle/tango
 
 > Toolkit for building redux/react applications
 
 ## Install
 
+```js
+npm install --save @eagle/tango react
 ```
-npm install @tvevt/tango --save
-```
+
+## Repository
+
+https://github.com/Graf009/tango.git
 
 ## Core Ideals
 
