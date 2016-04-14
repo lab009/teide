@@ -18,7 +18,8 @@
     "lint": "eslint src"
   },
   "peerDependencies": {
-    "react": "^15.0.1"
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "dependencies": {
     "@eagle/redux-immutablejs": "0.1.0",
@@ -35,6 +36,7 @@
     "reduce-reducers": "0.1.2",
     "redux": "3.4.0",
     "redux-actions": "0.9.1",
+    "redux-batched-subscribe": "0.1.4",
     "redux-thunk": "2.0.1"
   },
   "devDependencies": {
@@ -50,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "0.6.2",
     "eslint-plugin-react": "4.3.0",
     "react": "15.0.1",
+    "react-dom": "15.0.1",
     "rimraf": "2.5.2"
   }
 }
