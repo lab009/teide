@@ -40,7 +40,7 @@
     "redux-thunk": "2.0.1"
   },
   "devDependencies": {
-    "@eagle/eslint-config-eagle": "1.0.0",
+    "@eagle/eslint-config-eagle": "1.0.1",
     "babel-cli": "6.7.5",
     "babel-eslint": "6.0.2",
     "babel-plugin-add-module-exports": "0.1.2",
