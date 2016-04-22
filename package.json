@@ -24,7 +24,7 @@
   "dependencies": {
     "@eagle/redux-immutablejs": "0.1.0",
     "babel-runtime": "6.6.1",
-    "immutable": "3.7.6",
+    "immutable": "3.8.1",
     "lodash.filter": "4.3.0",
     "lodash.foreach": "4.2.0",
     "lodash.map": "4.3.0",
@@ -32,9 +32,9 @@
     "lodash.reduce": "4.3.0",
     "lodash.values": "4.1.0",
     "react-immutable-proptypes": "1.7.1",
-    "react-redux": "4.4.4",
+    "react-redux": "4.4.5",
     "reduce-reducers": "0.1.2",
-    "redux": "3.4.0",
+    "redux": "3.5.1",
     "redux-actions": "0.9.1",
     "redux-batched-subscribe": "0.1.4",
     "redux-thunk": "2.0.1"
