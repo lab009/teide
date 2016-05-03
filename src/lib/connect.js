@@ -4,17 +4,17 @@ import resolve from './resolveStoreProps'
 const mapStateToProps = (storeProps) => (storeState, ownProps) =>
   resolve(storeProps, storeState, ownProps)
 
-const options = {
+const defaults = {
   pure: true,
   withRef: true
 }
 
-export default (storeProps) => {
+export default (storeProps, options) => {
   const connector = connect(
     storeProps ? mapStateToProps(storeProps) : null,
     null,
     null,
-    options
+    { ...defaults, ...options }
   )
   return (Component) => {
     Component.storeProps = storeProps
