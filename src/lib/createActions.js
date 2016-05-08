@@ -24,10 +24,4 @@ export const createActions = (actions, dispatch) => {
   )
 }
 
-export const createActions2 = (actions) => {
-  if (typeof actions === 'string') return createAction(actions)
-  if (typeof actions === 'function') return actions
-  return mapValues(actions, createActions)
-}
-
 export default createActions

@@ -15,7 +15,8 @@
     "build": "npm run clean && npm run compile",
     "compile": "babel src --out-dir dist",
     "clean": "rimraf dist",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "ava"
   },
   "peerDependencies": {
     "react": "^15.0.1",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@eagle/eslint-config-eagle": "1.1.1",
+    "ava": "^0.14.0",
     "babel-cli": "6.7.7",
     "babel-eslint": "6.0.3",
     "babel-plugin-add-module-exports": "0.1.2",
@@ -55,5 +57,8 @@
     "react": "15.0.1",
     "react-dom": "15.0.1",
     "rimraf": "2.5.2"
+  },
+  "ava": {
+    "require": ["babel-register"]
   }
 }
