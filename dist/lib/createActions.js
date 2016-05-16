@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createActions2 = exports.createActions = undefined;
+exports.createActions = undefined;
 
 var _reduxActions = require('redux-actions');
 
@@ -34,12 +34,6 @@ var createActions = exports.createActions = function createActions(actions, disp
   return (0, _lodash2.default)(actions, function (action) {
     return createActions(action, dispatch);
   });
-};
-
-var createActions2 = exports.createActions2 = function createActions2(actions) {
-  if (typeof actions === 'string') return (0, _reduxActions.createAction)(actions);
-  if (typeof actions === 'function') return actions;
-  return (0, _lodash2.default)(actions, createActions);
 };
 
 exports.default = createActions;
