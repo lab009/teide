@@ -8,6 +8,7 @@ import createActions from './lib/createActions'
 import createReducer from './lib/createReducer'
 import createReducerActions from './lib/createReducerActions'
 import combineReducers from './lib/combineReducers'
+import CSSModules from './lib/CSSModules'
 
 class TangoComponent extends ReactComponent {
   static defaultState = {};
@@ -29,6 +30,7 @@ const PropTypes = {
 export {
   TangoComponent as Component,
   connect,
+  CSSModules,
   PropTypes,
   Provider,
   combineReducers,

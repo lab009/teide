@@ -24,9 +24,12 @@
   "dependencies": {
     "@eagle/redux-immutablejs": "0.1.0",
     "babel-runtime": "6.6.1",
+    "classnames": "2.2.5",
+    "hoist-non-react-statics": "1.0.6",
     "immutable": "3.8.1",
     "lodash.filter": "4.4.0",
     "lodash.foreach": "4.3.0",
+    "lodash.isfunction": "3.0.8",
     "lodash.map": "4.4.0",
     "lodash.mapvalues": "4.4.0",
     "lodash.reduce": "4.4.0",
