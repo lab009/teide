@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createStore = exports.createActions = exports.createReducerActions = exports.createReducer = exports.combineReducers = exports.Provider = exports.PropTypes = exports.connect = exports.Component = undefined;
+exports.createStore = exports.createActions = exports.createReducerActions = exports.createReducer = exports.combineReducers = exports.Provider = exports.PropTypes = exports.CSSModules = exports.connect = exports.Component = undefined;
 
 var _extends2 = require('babel-runtime/helpers/extends');
 
@@ -61,6 +61,10 @@ var _combineReducers = require('./lib/combineReducers');
 
 var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
+var _CSSModules = require('./lib/CSSModules');
+
+var _CSSModules2 = _interopRequireDefault(_CSSModules);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TangoComponent = function (_ReactComponent) {
@@ -92,6 +96,7 @@ var PropTypes = (0, _extends3.default)({}, _reactImmutableProptypes2.default, _r
 
 exports.Component = TangoComponent;
 exports.connect = _connect2.default;
+exports.CSSModules = _CSSModules2.default;
 exports.PropTypes = PropTypes;
 exports.Provider = _reactRedux.Provider;
 exports.combineReducers = _combineReducers2.default;
