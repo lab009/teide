@@ -1,11 +1,15 @@
 {
-  "presets": [
-    "es2015",
-    "react",
-    "stage-0"
-  ],
-  "plugins": [
-    "transform-runtime",
-    "add-module-exports"
-  ]
+  "presets": ["react"],
+  "plugins": ["transform-runtime"],
+
+  "env": {
+    "commonjs": {
+      "presets": ["es2015-loose", "stage-0"],
+      "plugins": ["add-module-exports"]
+    },
+
+    "es": {
+      "presets": ["es2015-loose-native-modules", "stage-0"]
+    }
+  }
 }
