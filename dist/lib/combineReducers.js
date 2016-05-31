@@ -1,12 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+exports.__esModule = true;
 
 var _reduxImmutablejs = require('@eagle/redux-immutablejs');
 
@@ -25,9 +19,9 @@ var combine = function combine() {
     reducers[_key] = arguments[_key];
   }
 
-  return _reduceReducers2.default.apply(undefined, (0, _toConsumableArray3.default)((0, _lodash2.default)(reducers, function (v) {
+  return _reduceReducers2.default.apply(undefined, (0, _lodash2.default)(reducers, function (v) {
     return typeof v === 'function' ? v : (0, _reduxImmutablejs.combineReducers)(v);
-  })));
+  }));
 };
 
 exports.default = combine;

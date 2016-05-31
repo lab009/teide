@@ -1,21 +1,10 @@
-'use strict';
+import _typeof from 'babel-runtime/helpers/typeof';
+import reduce from 'lodash.reduce';
 
-exports.__esModule = true;
-
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-var _lodash = require('lodash.reduce');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (plugins) {
+export default (function (plugins) {
   if (!Array.isArray(plugins)) throw new Error('Invalid plugins argument');
-  return (0, _lodash2.default)(plugins, function (p, v, k) {
-    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) !== 'object') {
+  return reduce(plugins, function (p, v, k) {
+    if ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) !== 'object') {
       throw new Error('Invalid export in plugin ' + k);
     }
 
@@ -28,7 +17,7 @@ exports.default = function (plugins) {
 
     if (Array.isArray(v.reducers)) {
       p.reducers = p.reducers.concat(v.reducers);
-    } else if ((0, _typeof3.default)(v.reducers) === 'object') {
+    } else if (_typeof(v.reducers) === 'object') {
       p.reducers.push(v.reducers);
     }
 
@@ -72,6 +61,4 @@ exports.default = function (plugins) {
     enhancers: [],
     hooks: []
   });
-};
-
-module.exports = exports['default'];
+})

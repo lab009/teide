@@ -1,14 +1,6 @@
-'use strict';
+import linkElement from './linkElement';
 
-exports.__esModule = true;
-
-var _linkElement = require('./linkElement');
-
-var _linkElement2 = _interopRequireDefault(_linkElement);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (Component, styles, options) {
+export default (function (Component, styles, options) {
   var WrappedComponent = function WrappedComponent() {
     for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       args[_key - 1] = arguments[_key];
@@ -19,12 +11,10 @@ exports.default = function (Component, styles, options) {
     var renderResult = Component.apply(undefined, [props].concat(args));
 
     if (renderResult) {
-      return (0, _linkElement2.default)(renderResult, styles, options);
+      return linkElement(renderResult, styles, options);
     }
     return renderResult;
   };
 
   return WrappedComponent;
-};
-
-module.exports = exports['default'];
+})

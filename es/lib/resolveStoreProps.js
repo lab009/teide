@@ -1,12 +1,4 @@
-'use strict';
-
-exports.__esModule = true;
-
-var _lodash = require('lodash.mapvalues');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+import mapValues from 'lodash.mapvalues';
 
 // supports array of strings, strings with dot, or function
 var lookup = function lookup(o, k, args) {
@@ -23,11 +15,8 @@ var lookup = function lookup(o, k, args) {
 // - function that returns an array of strings
 // it will then dive into an immutable object and grab all of these storeProps
 // and return the same object, but where the values are the resolved data
-
-exports.default = function (storeProps, storeState, props) {
-  return (0, _lodash2.default)(storeProps, function (v) {
+export default (function (storeProps, storeState, props) {
+  return mapValues(storeProps, function (v) {
     return lookup(storeState, v, [storeState, props]);
   });
-};
-
-module.exports = exports['default'];
+})

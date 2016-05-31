@@ -1,12 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+exports.__esModule = true;
 
 var _redux = require('redux');
 
@@ -64,16 +58,16 @@ exports.default = function (_ref) {
 
   // take in the options and reconcile them with the plugins provided
   var pluginValues = (0, _transformPlugins2.default)(plugins);
-  var finalReducers = [].concat((0, _toConsumableArray3.default)(reducers), (0, _toConsumableArray3.default)(pluginValues.reducers));
-  var finalMiddleware = [].concat(defaultMiddleware, (0, _toConsumableArray3.default)(middleware), (0, _toConsumableArray3.default)(pluginValues.middleware));
-  var finalEnhancers = [].concat(defaultEnhancers, (0, _toConsumableArray3.default)(enhancers), (0, _toConsumableArray3.default)(pluginValues.enhancers), [devtools]);
-  var finalHooks = [].concat((0, _toConsumableArray3.default)(hooks), (0, _toConsumableArray3.default)(pluginValues.hooks));
+  var finalReducers = [].concat(reducers, pluginValues.reducers);
+  var finalMiddleware = [].concat(defaultMiddleware, middleware, pluginValues.middleware);
+  var finalEnhancers = [].concat(defaultEnhancers, enhancers, pluginValues.enhancers, [devtools]);
+  var finalHooks = [].concat(hooks, pluginValues.hooks);
 
-  var store = (0, _redux.createStore)(_combineReducers2.default.apply(undefined, (0, _toConsumableArray3.default)(finalReducers)), initialState, _redux.compose.apply(undefined, [_redux.applyMiddleware.apply(undefined, (0, _toConsumableArray3.default)(finalMiddleware))].concat((0, _toConsumableArray3.default)(finalEnhancers))));
+  var store = (0, _redux.createStore)(_combineReducers2.default.apply(undefined, finalReducers), initialState, _redux.compose.apply(undefined, [_redux.applyMiddleware.apply(undefined, finalMiddleware)].concat(finalEnhancers)));
 
   store.replaceReducers = function (newReducers) {
     if (!Array.isArray(newReducers)) throw new Error('Invalid newReducers option');
-    return store.replaceReducer(_combineReducers2.default.apply(undefined, (0, _toConsumableArray3.default)(newReducers).concat((0, _toConsumableArray3.default)(pluginValues.reducers))));
+    return store.replaceReducer(_combineReducers2.default.apply(undefined, newReducers.concat(pluginValues.reducers)));
   };
 
   // apply hooks
