@@ -58,6 +58,6 @@ export default (plugins) => {
     reducers: [],
     middleware: [],
     enhancers: [],
-    hooks: []
+    hooks: [],
   })
 }

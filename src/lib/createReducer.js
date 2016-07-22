@@ -67,7 +67,7 @@ const createReducers = (o, parentName) => {
   return {
     name: parentName,
     isContainer: hadReducers,
-    reducers
+    reducers,
   }
 }
 
@@ -90,7 +90,7 @@ const createReducer = (o, parentName) => {
     name,
     initialState,
     reducer,
-    statePath
+    statePath,
   })
 }
 

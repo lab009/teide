@@ -16,7 +16,7 @@ class TangoComponent extends ReactComponent {
     super(...args)
     this.state = {
       ...this.constructor.defaultState,
-      ...this.state
+      ...this.state,
     }
     bindClass(this)
   }
@@ -24,7 +24,7 @@ class TangoComponent extends ReactComponent {
 
 const PropTypes = {
   ...IPropTypes,
-  ...RPropTypes
+  ...RPropTypes,
 }
 
 export {
@@ -37,5 +37,5 @@ export {
   createReducer,
   createReducerActions,
   createActions,
-  createStore
+  createStore,
 }

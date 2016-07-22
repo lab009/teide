@@ -15,10 +15,10 @@ const devtools = typeof window !== 'undefined' && window.devToolsExtension
   : identity
 
 const defaultEnhancers = [
-  batchedSubscribe(batchedUpdates)
+  batchedSubscribe(batchedUpdates),
 ]
 const defaultMiddleware = [
-  thunk
+  thunk,
 ]
 
 export default ({
@@ -27,7 +27,7 @@ export default ({
   enhancers = [],
   reducers = [],
   hooks = [],
-  initialState = Map()
+  initialState = Map(),
 }) => {
   if (!Array.isArray(reducers)) throw new Error('Invalid reducers option')
   if (!Array.isArray(middleware)) throw new Error('Invalid middleware option')
@@ -38,22 +38,22 @@ export default ({
   const pluginValues = transformPlugins(plugins)
   const finalReducers = [
     ...reducers,
-    ...pluginValues.reducers
+    ...pluginValues.reducers,
   ]
   const finalMiddleware = [
     ...defaultMiddleware,
     ...middleware,
-    ...pluginValues.middleware
+    ...pluginValues.middleware,
   ]
   const finalEnhancers = [
     ...defaultEnhancers,
     ...enhancers,
     ...pluginValues.enhancers,
-    devtools
+    devtools,
   ]
   const finalHooks = [
     ...hooks,
-    ...pluginValues.hooks
+    ...pluginValues.hooks,
   ]
 
   const store = createStore(
