@@ -6,7 +6,7 @@ const mapStateToProps = (storeProps) => (storeState, ownProps) =>
 
 const defaults = {
   pure: true,
-  withRef: true
+  withRef: false,
 }
 
 export default (storeProps, options) => {
