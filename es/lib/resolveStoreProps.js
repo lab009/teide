@@ -19,4 +19,4 @@ export default (function (storeProps, storeState, props) {
   return mapValues(storeProps, function (v) {
     return lookup(storeState, v, [storeState, props]);
   });
-})
+});

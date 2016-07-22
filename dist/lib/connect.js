@@ -22,7 +22,7 @@ var mapStateToProps = function mapStateToProps(storeProps) {
 
 var defaults = {
   pure: true,
-  withRef: true
+  withRef: false
 };
 
 exports.default = function (storeProps, options) {

@@ -28,4 +28,4 @@ export default (function (Component, styles, options) {
   }(Component);
 
   return hoistNonReactStatics(WrappedComponent, Component);
-})
+});

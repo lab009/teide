@@ -22,4 +22,4 @@ export default (function (styles, options) {
 
     return decoratedClass;
   };
-})
+});

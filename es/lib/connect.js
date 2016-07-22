@@ -10,7 +10,7 @@ var mapStateToProps = function mapStateToProps(storeProps) {
 
 var defaults = {
   pure: true,
-  withRef: true
+  withRef: false
 };
 
 export default (function (storeProps, options) {
@@ -19,4 +19,4 @@ export default (function (storeProps, options) {
     Component.storeProps = storeProps;
     return connector(Component);
   };
-})
+});

@@ -5,4 +5,4 @@ export default (function (context) {
   }).forEach(function (method) {
     context[method] = context[method].bind(context);
   });
-})
+});

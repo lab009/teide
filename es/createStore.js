@@ -56,4 +56,4 @@ export default (function (_ref) {
   });
 
   return store;
-})
+});

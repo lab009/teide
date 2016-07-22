@@ -17,4 +17,4 @@ export default (function (Component, styles, options) {
   };
 
   return WrappedComponent;
-})
+});
