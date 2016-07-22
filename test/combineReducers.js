@@ -9,15 +9,15 @@ test('should combine and init two immutable reducer functions', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
   let currState = undefined
@@ -29,11 +29,11 @@ test('should combine and init two immutable reducer functions', t => {
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 1
+      count: 1,
     },
     otherCounter: {
-      count: 1
-    }
+      count: 1,
+    },
   })
 })
 
@@ -42,8 +42,8 @@ test('should combine and init an immutable reducer and an object', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const secondReducer = {
     increment: (v = 1, action = {}) => {
@@ -51,7 +51,7 @@ test('should combine and init an immutable reducer and an object', t => {
         return ++v
       }
       return v
-    }
+    },
   }
   const reducer = combineReducers(firstReducer, secondReducer)
   let currState = undefined
@@ -63,9 +63,9 @@ test('should combine and init an immutable reducer and an object', t => {
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 1
+      count: 1,
     },
-    increment: 1
+    increment: 1,
   })
 })
 
@@ -74,8 +74,8 @@ test('should combine and init an immutable reducer and an object from existing s
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const secondReducer = {
     increment: (v = 1, action = {}) => {
@@ -83,7 +83,7 @@ test('should combine and init an immutable reducer and an object from existing s
         return ++v
       }
       return v
-    }
+    },
   }
   const reducer = combineReducers(firstReducer, secondReducer)
   let currState = Map()
@@ -95,9 +95,9 @@ test('should combine and init an immutable reducer and an object from existing s
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 1
+      count: 1,
     },
-    increment: 1
+    increment: 1,
   })
 })
 
@@ -106,15 +106,15 @@ test('should combine two immutable reducer functions', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
   let currState = undefined
@@ -127,11 +127,11 @@ test('should combine two immutable reducer functions', t => {
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 2
+      count: 2,
     },
     otherCounter: {
-      count: 0
-    }
+      count: 0,
+    },
   })
 })
 
@@ -142,14 +142,14 @@ test('should combine an immutable reducer and an object', t => {
         return ++v
       }
       return v
-    }
+    },
   }
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
   let currState = undefined
@@ -163,8 +163,8 @@ test('should combine an immutable reducer and an object', t => {
   t.deepEqual(currState.toJS(), {
     increment: 2,
     otherCounter: {
-      count: 0
-    }
+      count: 0,
+    },
   })
 })
 
@@ -182,8 +182,8 @@ test('should an immutable reducer and a plain function', t => {
     otherCounter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
   let currState = undefined
@@ -198,8 +198,8 @@ test('should an immutable reducer and a plain function', t => {
   t.deepEqual(currState.toJS(), {
     laCuenta: 2,
     otherCounter: {
-      count: 0
-    }
+      count: 0,
+    },
   })
 })
 
@@ -208,9 +208,8 @@ test('should a plain function and an immutable reducer', t => {
     if (action.type === 'increment') {
       if (s.has('laCuenta')) {
         return s.update('laCuenta', v => ++v)
-      } else {
-        return s.set('laCuenta', 1)
       }
+      return s.set('laCuenta', 1)
     }
     return s
   }
@@ -218,8 +217,8 @@ test('should a plain function and an immutable reducer', t => {
     otherCounter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const reducer = combineReducers(secondReducer, firstReducer)
   let currState = undefined
@@ -234,7 +233,7 @@ test('should a plain function and an immutable reducer', t => {
   t.deepEqual(currState.toJS(), {
     laCuenta: 2,
     otherCounter: {
-      count: 0
-    }
+      count: 0,
+    },
   })
 })

@@ -7,7 +7,7 @@ test('should combine a single reducer', t => {
   const reducer = createReducer({
     initialState: Map({ count: 1 }),
     increment: (v) => v.update('count', v => ++v),
-    decrement: (v) => v.update('count', v => --v)
+    decrement: (v) => v.update('count', v => --v),
   })
   const initialState = undefined
 
@@ -22,8 +22,8 @@ test('should combine a nested reducer', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const initialState = undefined
 
@@ -39,9 +39,9 @@ test('should combine a really nested reducer', t => {
       counter: {
         initialState: Map({ count: 1 }),
         increment: (v) => v.update('count', v => ++v),
-        decrement: (v) => v.update('count', v => --v)
-      }
-    }
+        decrement: (v) => v.update('count', v => --v),
+      },
+    },
   })
   const initialState = undefined
 
@@ -59,11 +59,11 @@ test('should combine a really really nested reducer', t => {
           counter: {
             initialState: Map({ count: 1 }),
             increment: (v) => v.update('count', v => ++v),
-            decrement: (v) => v.update('count', v => --v)
-          }
-        }
-      }
-    }
+            decrement: (v) => v.update('count', v => --v),
+          },
+        },
+      },
+    },
   })
   const initialState = undefined
 
@@ -86,11 +86,11 @@ test('should init with root state', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const initialState = Map({
-    test: 123
+    test: 123,
   })
 
   t.truthy(reducer)
@@ -98,9 +98,9 @@ test('should init with root state', t => {
   t.deepEqual(reducer(initialState, { type: 'INIT' }).toJS(),
     {
       counter: {
-        count: 1
+        count: 1,
       },
-      test: 123
+      test: 123,
     }
   )
 })
@@ -110,8 +110,8 @@ test('should work with empty root state', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const initialState = Map()
   t.truthy(reducer)
@@ -125,11 +125,11 @@ test('shouldnt default node state', t => {
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const currState = Map({
-    test: 123
+    test: 123,
   })
 
   t.truthy(reducer)
@@ -138,8 +138,8 @@ test('shouldnt default node state', t => {
     {
       test: 123,
       counter: {
-        count: 2
-      }
+        count: 2,
+      },
     }
   )
 })
@@ -149,11 +149,11 @@ test('should maintain state changes', t => {
     counter: {
       initialState: Map({ count: 0 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   const initialState = Map({
-    test: 123
+    test: 123,
   })
   let currState = initialState
 
@@ -167,9 +167,9 @@ test('should maintain state changes', t => {
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 3
+      count: 3,
     },
-    test: 123
+    test: 123,
   })
 })
 
@@ -178,10 +178,10 @@ test('should error on non-container initialState', t => {
     createReducer({
       initialState: Map({
         counter: {
-          count: 2
-        }
+          count: 2,
+        },
       }),
-      counter: {}
+      counter: {},
     })
   })
 })
@@ -191,9 +191,9 @@ test('should error on nested non-container initialState', t => {
     createReducer({
       counter: {
         initialState: Map({
-          count: 2
-        })
-      }
+          count: 2,
+        }),
+      },
     })
   })
 })
@@ -204,15 +204,15 @@ test('should error on conflicting parent initialState', t => {
       initialState: Map({
         ay: 0,
         counter: {
-          count: 2
-        }
+          count: 2,
+        },
       }),
       doSomething: (v) => v.update('ay', v => ++v),
       counter: {
         initialState: Map({ count: 1 }),
         increment: (v) => v.update('count', v => ++v),
-        decrement: (v) => v.update('count', v => --v)
-      }
+        decrement: (v) => v.update('count', v => --v),
+      },
     })
   })
 })
@@ -225,8 +225,8 @@ test('should error on non-map parent initialState', t => {
       counter: {
         initialState: Map({ count: 1 }),
         increment: (v) => v.update('count', v => ++v),
-        decrement: (v) => v.update('count', v => --v)
-      }
+        decrement: (v) => v.update('count', v => --v),
+      },
     })
   })
 })
@@ -234,20 +234,20 @@ test('should error on non-map parent initialState', t => {
 test('should error with nested non-immutable state', t => {
   const reducer = createReducer({
     initialState: Map({
-      ay: 0
+      ay: 0,
     }),
     doSomething: (v) => v.update('ay', v => ++v),
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   let currState = Map({
     ay: 0,
     counter: {
-      count: 0
-    }
+      count: 0,
+    },
   })
 
   t.truthy(reducer)
@@ -261,20 +261,20 @@ test('should error with nested non-immutable state', t => {
 test('should error with root non-immutable state', t => {
   const reducer = createReducer({
     initialState: Map({
-      ay: 0
+      ay: 0,
     }),
     doSomething: (v) => v.update('ay', v => ++v),
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   let currState = {
     ay: 0,
     counter: Map({
-      count: 0
-    })
+      count: 0,
+    }),
   }
 
   t.truthy(reducer)
@@ -288,20 +288,20 @@ test('should error with root non-immutable state', t => {
 test('should work with nested state', t => {
   const reducer = createReducer({
     initialState: Map({
-      ay: 0
+      ay: 0,
     }),
     doSomething: (v) => v.update('ay', v => ++v),
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   let currState = Map({
     ay: 0,
     counter: Map({
-      count: 0
-    })
+      count: 0,
+    }),
   })
 
   t.truthy(reducer)
@@ -316,23 +316,23 @@ test('should work with nested state', t => {
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 2
+      count: 2,
     },
-    ay: 2
+    ay: 2,
   })
 })
 
 test('should work with nested initialState', t => {
   const reducer = createReducer({
     initialState: Map({
-      ay: 0
+      ay: 0,
     }),
     doSomething: (v) => v.update('ay', v => ++v),
     counter: {
       initialState: Map({ count: 1 }),
       increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v)
-    }
+      decrement: (v) => v.update('count', v => --v),
+    },
   })
   let currState = undefined
 
@@ -348,8 +348,8 @@ test('should work with nested initialState', t => {
 
   t.deepEqual(currState.toJS(), {
     counter: {
-      count: 3
+      count: 3,
     },
-    ay: 2
+    ay: 2,
   })
 })

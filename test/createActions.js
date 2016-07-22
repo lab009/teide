@@ -5,7 +5,7 @@ import createActions from '../src/lib/createActions'
 test('should create from a flat string object', t => {
   const actions = createActions({
     one: 'one',
-    two: 'two'
+    two: 'two',
   }, (action) => {
     t.truthy(action)
   })
@@ -19,11 +19,11 @@ test('should create from a flat string object', t => {
 test('should create from a nested string object', t => {
   const actions = createActions({
     one: {
-      half: 'one'
+      half: 'one',
     },
     two: {
-      half: 'two'
-    }
+      half: 'two',
+    },
   }, (action) => {
     t.truthy(action)
   })
@@ -37,7 +37,7 @@ test('should create from a nested string object', t => {
 test('should create from a flat function object', t => {
   const actions = createActions({
     one: () => ({}),
-    two: () => ({})
+    two: () => ({}),
   }, (action) => {
     t.truthy(action)
   })
