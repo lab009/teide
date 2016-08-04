@@ -1,3 +1,4 @@
 {
+  "root": true,
   "extends": "@eagle/eslint-config-eagle"
 }

@@ -3,7 +3,7 @@ import mapValues from 'lodash.mapvalues'
 
 // equiv of redux createAction but recursive
 
-export const createActions = (actions, dispatch) => {
+const createActions = (actions, dispatch) => {
   if (typeof dispatch !== 'function') throw new Error('Missing dispatch argument in createActions')
 
   // map string to a fn and pass back through
