@@ -53,6 +53,7 @@
     "@eagle/eslint-config-eagle": "1.4.2",
     "ava": "0.16.0",
     "babel-cli": "6.18.0",
+    "babel-core": "6.18.2",
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-register": "6.18.0",
     "cross-env": "3.1.3",
