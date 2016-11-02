@@ -3,11 +3,11 @@ import { Map } from 'immutable'
 
 import createReducerActions from '../src/lib/createReducerActions'
 
-test('should create actions for a flat reducer', t => {
+test('should create actions for a flat reducer', (t) => {
   const reducer = {
     initialState: Map({ count: 1 }),
-    increment: (v) => v.update('count', v => ++v),
-    decrement: (v) => v.update('count', v => --v),
+    increment: v => v.update('count', v => ++v),
+    decrement: v => v.update('count', v => --v),
   }
   const actions = createReducerActions(reducer)
 
@@ -20,12 +20,12 @@ test('should create actions for a flat reducer', t => {
   t.deepEqual(actions.decrement(1), { type: 'decrement', payload: 1 })
 })
 
-test('should create actions for a nested reducer', t => {
+test('should create actions for a nested reducer', (t) => {
   const reducer = {
     counter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   }
   const actions = createReducerActions(reducer)
@@ -39,13 +39,13 @@ test('should create actions for a nested reducer', t => {
   t.deepEqual(actions.counter.decrement(1), { type: 'counter.decrement', payload: 1 })
 })
 
-test('should create actions for a really nested reducer', t => {
+test('should create actions for a really nested reducer', (t) => {
   const reducer = {
     yo: {
       counter: {
         initialState: Map({ count: 1 }),
-        increment: (v) => v.update('count', v => ++v),
-        decrement: (v) => v.update('count', v => --v),
+        increment: v => v.update('count', v => ++v),
+        decrement: v => v.update('count', v => --v),
       },
     },
   }

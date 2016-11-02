@@ -10,7 +10,7 @@ import { Map, Iterable } from 'immutable'
 // container - an object that contains initialState + reducer functions
 // initialState - the default state of a node and its children
 
-const isFunction = (v) => typeof v === 'function'
+const isFunction = v => (typeof v === 'function')
 
 const getInitialState = (o, ns) =>
   reduce(o, (prev, v, k) => {
@@ -29,22 +29,21 @@ const getInitialState = (o, ns) =>
     return prev
   }, o.initialState || Map())
 
-const createReducerNode = ({ name, statePath, reducer, initialState }) =>
-  (state, action = {}) => {
-    // if we are the reducer container, pass them our cherry-picked state
-    // otherwise pass down the full state to the next container
-    const currNodeState = (statePath ? state.getIn(statePath) : state) || initialState
-    if (!Iterable.isIterable(currNodeState)) {
-      throw new Error(`Reducer "${name || 'root'}" was given a non-Immutable state!`)
-    }
-    const nextNodeState = reducer(currNodeState, action)
-    if (!Iterable.isIterable(nextNodeState)) {
-      throw new Error(`Reducer "${name || 'root'}" returned a non-Immutable state!`)
-    }
-    const nextRootState = statePath ? state.setIn(statePath, nextNodeState) : nextNodeState
-
-    return nextRootState
+const createReducerNode = ({ name, statePath, reducer, initialState }) => (state, action = {}) => {
+  // if we are the reducer container, pass them our cherry-picked state
+  // otherwise pass down the full state to the next container
+  const currNodeState = (statePath ? state.getIn(statePath) : state) || initialState
+  if (!Iterable.isIterable(currNodeState)) {
+    throw new Error(`Reducer "${name || 'root'}" was given a non-Immutable state!`)
   }
+  const nextNodeState = reducer(currNodeState, action)
+  if (!Iterable.isIterable(nextNodeState)) {
+    throw new Error(`Reducer "${name || 'root'}" returned a non-Immutable state!`)
+  }
+  const nextRootState = statePath ? state.setIn(statePath, nextNodeState) : nextNodeState
+
+  return nextRootState
+}
 
 // recursively map reducers object to an
 // array of reducers that handle namespaced actions
@@ -56,10 +55,12 @@ const createReducers = (o, parentName) => {
 
     if (isFunction(v)) {
       hadReducers = true
+      // eslint-disable-next-line consistent-return
       return handleAction(name, v)
     }
 
     if (typeof v === 'object') {
+      // eslint-disable-next-line no-use-before-define, consistent-return
       return createReducer(v, name)
     }
   }), isFunction)

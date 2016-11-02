@@ -8,7 +8,7 @@ import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import combineReducers from './lib/combineReducers'
 import transformPlugins from './lib/transformPlugins'
 
-const identity = (v) => v
+const identity = v => v
 
 const devtools = typeof window !== 'undefined' && window.devToolsExtension
   ? window.devToolsExtension()
@@ -73,7 +73,7 @@ export default ({
   }
 
   // apply hooks
-  each(finalHooks, (fn) => fn(store))
+  each(finalHooks, fn => fn(store))
 
   return store
 }

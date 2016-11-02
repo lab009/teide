@@ -4,23 +4,23 @@ import { Map } from 'immutable'
 import createReducer from '../src/lib/createReducer'
 import combineReducers from '../src/lib/combineReducers'
 
-test('should combine and init two immutable reducer functions', t => {
+test('should combine and init two immutable reducer functions', (t) => {
   const firstReducer = createReducer({
     counter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
-  let currState = undefined
+  let currState
 
   t.truthy(reducer)
   t.is(typeof reducer, 'function')
@@ -37,12 +37,12 @@ test('should combine and init two immutable reducer functions', t => {
   })
 })
 
-test('should combine and init an immutable reducer and an object', t => {
+test('should combine and init an immutable reducer and an object', (t) => {
   const firstReducer = createReducer({
     counter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const secondReducer = {
@@ -54,7 +54,7 @@ test('should combine and init an immutable reducer and an object', t => {
     },
   }
   const reducer = combineReducers(firstReducer, secondReducer)
-  let currState = undefined
+  let currState
 
   t.truthy(reducer)
   t.is(typeof reducer, 'function')
@@ -69,12 +69,12 @@ test('should combine and init an immutable reducer and an object', t => {
   })
 })
 
-test('should combine and init an immutable reducer and an object from existing state', t => {
+test('should combine and init an immutable reducer and an object from existing state', (t) => {
   const firstReducer = createReducer({
     counter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const secondReducer = {
@@ -101,23 +101,23 @@ test('should combine and init an immutable reducer and an object from existing s
   })
 })
 
-test('should combine two immutable reducer functions', t => {
+test('should combine two immutable reducer functions', (t) => {
   const firstReducer = createReducer({
     counter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
-  let currState = undefined
+  let currState
 
   t.truthy(reducer)
   t.is(typeof reducer, 'function')
@@ -135,7 +135,7 @@ test('should combine two immutable reducer functions', t => {
   })
 })
 
-test('should combine an immutable reducer and an object', t => {
+test('should combine an immutable reducer and an object', (t) => {
   const firstReducer = {
     increment: (v = 1, action = {}) => {
       if (action.type === 'increment') {
@@ -147,12 +147,12 @@ test('should combine an immutable reducer and an object', t => {
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
-  let currState = undefined
+  let currState
 
   t.truthy(reducer)
   t.is(typeof reducer, 'function')
@@ -168,7 +168,7 @@ test('should combine an immutable reducer and an object', t => {
   })
 })
 
-test('should an immutable reducer and a plain function', t => {
+test('should an immutable reducer and a plain function', (t) => {
   const firstReducer = (s = Map(), action = {}) => {
     if (action.type === 'increment') {
       if (s.has('laCuenta')) {
@@ -181,12 +181,12 @@ test('should an immutable reducer and a plain function', t => {
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const reducer = combineReducers(firstReducer, secondReducer)
-  let currState = undefined
+  let currState
 
   t.truthy(reducer)
   t.is(typeof reducer, 'function')
@@ -203,7 +203,7 @@ test('should an immutable reducer and a plain function', t => {
   })
 })
 
-test('should a plain function and an immutable reducer', t => {
+test('should a plain function and an immutable reducer', (t) => {
   const firstReducer = (s = Map(), action = {}) => {
     if (action.type === 'increment') {
       if (s.has('laCuenta')) {
@@ -216,12 +216,12 @@ test('should a plain function and an immutable reducer', t => {
   const secondReducer = createReducer({
     otherCounter: {
       initialState: Map({ count: 1 }),
-      increment: (v) => v.update('count', v => ++v),
-      decrement: (v) => v.update('count', v => --v),
+      increment: v => v.update('count', v => ++v),
+      decrement: v => v.update('count', v => --v),
     },
   })
   const reducer = combineReducers(secondReducer, firstReducer)
-  let currState = undefined
+  let currState
 
   t.truthy(reducer)
   t.is(typeof reducer, 'function')

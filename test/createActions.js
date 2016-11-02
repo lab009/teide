@@ -2,7 +2,7 @@ import test from 'ava'
 
 import createActions from '../src/lib/createActions'
 
-test('should create from a flat string object', t => {
+test('should create from a flat string object', (t) => {
   const actions = createActions({
     one: 'one',
     two: 'two',
@@ -16,7 +16,7 @@ test('should create from a flat string object', t => {
   t.deepEqual(actions.two(2), { type: 'two', payload: 2 })
 })
 
-test('should create from a nested string object', t => {
+test('should create from a nested string object', (t) => {
   const actions = createActions({
     one: {
       half: 'one',
@@ -34,7 +34,7 @@ test('should create from a nested string object', t => {
   t.deepEqual(actions.two.half(2), { type: 'two', payload: 2 })
 })
 
-test('should create from a flat function object', t => {
+test('should create from a flat function object', (t) => {
   const actions = createActions({
     one: () => ({}),
     two: () => ({}),

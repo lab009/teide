@@ -4,10 +4,10 @@ import isFunction from 'lodash.isfunction'
 import extendReactClass from './css-modules/extendReactClass'
 import wrapStatelessFunction from './css-modules/wrapStatelessFunction'
 
-const isReactComponent = (maybeReactComponent) =>
+const isReactComponent = maybeReactComponent =>
   'prototype' in maybeReactComponent && isFunction(maybeReactComponent.prototype.render)
 
-export default (styles, options) => Component => {
+export default (styles, options) => (Component) => {
   let decoratedClass
 
   if (isReactComponent(Component)) {

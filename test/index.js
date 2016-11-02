@@ -2,7 +2,7 @@ import test from 'ava'
 
 import * as tango from '../src'
 
-test('should export the right stuff', t => {
+test('should export the right stuff', (t) => {
   t.truthy(tango.Component, 'Component')
   t.truthy(tango.connect, 'connect')
   t.truthy(tango.CSSModules, 'CSSModules')

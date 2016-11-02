@@ -1,4 +1,10 @@
 {
   "root": true,
-  "extends": "@eagle/eslint-config-eagle"
+  "extends": "@eagle/eslint-config-eagle",
+  "globals": {
+    "window": false
+  },
+  "rules": {
+    "new-cap": "warn"
+  }
 }

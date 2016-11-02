@@ -19,9 +19,7 @@ const createActions = (actions, dispatch) => {
   }
 
   // iterate through objects and do mapping
-  return mapValues(actions, (action) =>
-    createActions(action, dispatch)
-  )
+  return mapValues(actions, action => createActions(action, dispatch))
 }
 
 export default createActions
