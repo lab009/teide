@@ -8,6 +8,7 @@ test('should create from a flat string object', (t) => {
     two: 'two',
   }, (action) => {
     t.truthy(action)
+    return action
   })
   t.truthy(actions.one)
   t.truthy(actions.two)
@@ -26,6 +27,7 @@ test('should create from a nested string object', (t) => {
     },
   }, (action) => {
     t.truthy(action)
+    return action
   })
   t.truthy(actions.one.half)
   t.truthy(actions.two.half)
@@ -40,6 +42,7 @@ test('should create from a flat function object', (t) => {
     two: () => ({}),
   }, (action) => {
     t.truthy(action)
+    return action
   })
   t.truthy(actions.one)
   t.truthy(actions.two)
