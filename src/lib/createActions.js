@@ -13,8 +13,7 @@ const createActions = (actions, dispatch) => {
   if (typeof actions === 'function') {
     return (...args) => {
       const action = actions(...args)
-      dispatch(action)
-      return action
+      return dispatch(action)
     }
   }
 
