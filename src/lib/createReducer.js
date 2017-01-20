@@ -56,7 +56,7 @@ const createReducers = (o, parentName) => {
     if (isFunction(v)) {
       hadReducers = true
       // eslint-disable-next-line consistent-return
-      return handleAction(name, v)
+      return handleAction(name, v, null)
     }
 
     if (typeof v === 'object') {
