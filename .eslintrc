@@ -3,8 +3,5 @@
   "extends": "@lab009/eslint-config-lab009",
   "globals": {
     "window": false
-  },
-  "rules": {
-    "no-param-reassign": "warn"
   }
 }

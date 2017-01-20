@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@lab009/babel-preset-lab009": "2.0.0",
-    "@lab009/eslint-config-lab009": "2.0.0",
+    "@lab009/eslint-config-lab009": "2.1.0",
     "ava": "0.17.0",
     "babel-cli": "6.22.2",
     "babel-core": "6.22.1",

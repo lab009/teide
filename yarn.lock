@@ -19,9 +19,9 @@
     babel-preset-react "6.16.0"
     babel-runtime "6.20.0"
 
-"@lab009/eslint-config-lab009@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@lab009/eslint-config-lab009/-/eslint-config-lab009-2.0.0.tgz#896fb4f3cbd6ec082c30ea6fe2784d7c42f76791"
+"@lab009/eslint-config-lab009@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@lab009/eslint-config-lab009/-/eslint-config-lab009-2.1.0.tgz#bde7d4672d82e59e703652b6d29ca084191871f8"
   dependencies:
     babel-eslint "7.1.1"
     eslint-config-airbnb "14.0.0"
