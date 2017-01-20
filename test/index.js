@@ -5,7 +5,6 @@ import * as teide from '../src'
 test('should export the right stuff', (t) => {
   t.truthy(teide.Component, 'Component')
   t.truthy(teide.connect, 'connect')
-  t.truthy(teide.CSSModules, 'CSSModules')
   t.truthy(teide.PropTypes, 'PropTypes')
   t.truthy(teide.Provider, 'Provider')
   t.truthy(teide.combineReducers, 'combineReducers')
