@@ -1,16 +1,16 @@
 import test from 'ava'
 
-import * as tango from '../src'
+import * as teide from '../src'
 
 test('should export the right stuff', (t) => {
-  t.truthy(tango.Component, 'Component')
-  t.truthy(tango.connect, 'connect')
-  t.truthy(tango.CSSModules, 'CSSModules')
-  t.truthy(tango.PropTypes, 'PropTypes')
-  t.truthy(tango.Provider, 'Provider')
-  t.truthy(tango.combineReducers, 'combineReducers')
-  t.truthy(tango.createReducer, 'createReducer')
-  t.truthy(tango.createReducerActions, 'createReducerActions')
-  t.truthy(tango.createActions, 'createActions')
-  t.truthy(tango.createStore, 'createStore')
+  t.truthy(teide.Component, 'Component')
+  t.truthy(teide.connect, 'connect')
+  t.truthy(teide.CSSModules, 'CSSModules')
+  t.truthy(teide.PropTypes, 'PropTypes')
+  t.truthy(teide.Provider, 'Provider')
+  t.truthy(teide.combineReducers, 'combineReducers')
+  t.truthy(teide.createReducer, 'createReducer')
+  t.truthy(teide.createReducerActions, 'createReducerActions')
+  t.truthy(teide.createActions, 'createActions')
+  t.truthy(teide.createStore, 'createStore')
 })

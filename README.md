@@ -1,16 +1,16 @@
-# @eagle/tango
+# @lab009/teide
 
 > Toolkit for building redux/react applications
 
 ## Install
 
 ```js
-npm install --save @eagle/tango react react-dom
+npm install --save @lab009/teide react react-dom
 ```
 
 ## Repository
 
-https://github.com/Graf009/tango.git
+https://github.com/lab009/teide.git
 
 ## Core Ideals
 
@@ -44,4 +44,4 @@ https://github.com/Graf009/tango.git
 
 ## Documentation
 
-**Now**, check out the [documentation](https://github.com/Graf009/tango/tree/master/docs) to get started!
+**Now**, check out the [documentation](https://github.com/lab009/teide/tree/master/docs) to get started!

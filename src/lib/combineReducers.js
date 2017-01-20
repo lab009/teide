@@ -1,4 +1,4 @@
-import { combineReducers } from '@eagle/redux-immutablejs'
+import { combineReducers } from '@lab009/redux-immutablejs'
 import map from 'lodash.map'
 import reduceReducers from 'reduce-reducers'
 

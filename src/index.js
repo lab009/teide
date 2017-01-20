@@ -10,7 +10,7 @@ import createReducerActions from './lib/createReducerActions'
 import combineReducers from './lib/combineReducers'
 import CSSModules from './lib/CSSModules'
 
-class TangoComponent extends ReactComponent {
+class TeideComponent extends ReactComponent {
   static defaultState = {};
   constructor(...args) {
     super(...args)
@@ -28,7 +28,7 @@ const PropTypes = {
 }
 
 export {
-  TangoComponent as Component,
+  TeideComponent as Component,
   connect,
   CSSModules,
   PropTypes,

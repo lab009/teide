@@ -1,12 +1,12 @@
 # PropTypes
 
-The @eagle/tango PropTypes inherit from [React PropTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation) as well as [react-immutable-proptypes](https://github.com/HurricaneJames/react-immutable-proptypes) to add support for immutable validators.
+The @lab009/teide PropTypes inherit from [React PropTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation) as well as [react-immutable-proptypes](https://github.com/HurricaneJames/react-immutable-proptypes) to add support for immutable validators.
 
 ## Example
 
 ```js
 // ...
-import { PropTypes, Component } from '@eagle/tango'
+import { PropTypes, Component } from '@lab009/teide'
 
 export default class View extends Component {
   // ...
