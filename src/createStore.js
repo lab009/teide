@@ -61,14 +61,14 @@ export default ({
     initialState,
     compose(
       applyMiddleware(...finalMiddleware),
-      ...finalEnhancers
-    )
+      ...finalEnhancers,
+    ),
   )
 
   store.replaceReducers = (newReducers) => {
     if (!Array.isArray(newReducers)) throw new Error('Invalid newReducers option')
     return store.replaceReducer(
-      combineReducers(...newReducers, ...pluginValues.reducers)
+      combineReducers(...newReducers, ...pluginValues.reducers),
     )
   }
 

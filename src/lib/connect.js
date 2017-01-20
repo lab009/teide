@@ -14,7 +14,7 @@ export default (storeProps, options) => {
     storeProps ? mapStateToProps(storeProps) : null,
     null,
     null,
-    { ...defaults, ...options }
+    { ...defaults, ...options },
   )
   return (Component) => {
     Component.storeProps = storeProps
