@@ -5,18 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createStore = exports.createActions = exports.createReducerActions = exports.createReducer = exports.combineReducers = exports.Provider = exports.PropTypes = exports.connect = exports.Component = undefined;
 
-var _classCallCheck2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _possibleConstructorReturn2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
 var _react = require('react');
 
 var _reactRedux = require('react-redux');
@@ -55,19 +43,25 @@ var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var TeideComponent = function (_ReactComponent) {
-  (0, _inherits3.default)(TeideComponent, _ReactComponent);
+  _inherits(TeideComponent, _ReactComponent);
 
   function TeideComponent() {
     var _ref;
 
-    (0, _classCallCheck3.default)(this, TeideComponent);
+    _classCallCheck(this, TeideComponent);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (_ref = TeideComponent.__proto__ || Object.getPrototypeOf(TeideComponent)).call.apply(_ref, [this].concat(args)));
+    var _this = _possibleConstructorReturn(this, (_ref = TeideComponent.__proto__ || Object.getPrototypeOf(TeideComponent)).call.apply(_ref, [this].concat(args)));
 
     _this.state = Object.assign({}, _this.constructor.defaultState, _this.state);
     (0, _bindClass2.default)(_this);

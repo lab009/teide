@@ -4,13 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _typeof2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _reduxActions = require('redux-actions');
 
@@ -38,6 +32,8 @@ var _immutable = require('immutable');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 // terminology:
 // container - an object that contains initialState + reducer functions
 // initialState - the default state of a node and its children
@@ -51,7 +47,7 @@ var getInitialState = function getInitialState(o, ns) {
     if (k === 'initialState') return prev;
     var name = ns ? ns + '.' + k : k;
 
-    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) === 'object') {
+    if ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) === 'object') {
       if (!_immutable.Map.isMap(prev)) {
         throw new Error('Reducer "' + (ns || 'root') + '" has a non-map initialState, so it can\'t have children');
       }
@@ -102,7 +98,7 @@ var createReducers = function createReducers(o, parentName) {
       return (0, _reduxActions.handleAction)(name, v, null);
     }
 
-    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) === 'object') {
+    if ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) === 'object') {
       // eslint-disable-next-line no-use-before-define, consistent-return
       return createReducer(v, name);
     }
@@ -132,7 +128,7 @@ var createReducer = function createReducer(o, parentName) {
     throw new Error('Reducer "' + (name || 'root') + '" is missing an Immutable initialState');
   }
 
-  var reducer = _reduceReducers2.default.apply(undefined, (0, _toConsumableArray3.default)((0, _lodash4.default)(reducers)));
+  var reducer = _reduceReducers2.default.apply(undefined, _toConsumableArray((0, _lodash4.default)(reducers)));
   var statePath = name && isContainer ? name.split('.') : undefined;
   return createReducerNode({
     name: name,

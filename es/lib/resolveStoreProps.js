@@ -4,19 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
 var _lodash = require('lodash.mapvalues');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 // supports array of strings, strings with dot, or function
 var lookup = function lookup(o, k, args) {
-  if (typeof k === 'function') return k.apply(undefined, (0, _toConsumableArray3.default)(args));
+  if (typeof k === 'function') return k.apply(undefined, _toConsumableArray(args));
   if (typeof k === 'string') return o.getIn(k.split('.'));
   if (Array.isArray(k)) return o.getIn(k);
   throw new Error('Unknown lookup key: ' + k);

@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _lodash = require('lodash.reduce');
 
@@ -17,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (plugins) {
   if (!Array.isArray(plugins)) throw new Error('Invalid plugins argument');
   return (0, _lodash2.default)(plugins, function (p, v, k) {
-    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) !== 'object') {
+    if ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) !== 'object') {
       throw new Error('Invalid export in plugin ' + k);
     }
 
@@ -30,7 +28,7 @@ exports.default = function (plugins) {
 
     if (Array.isArray(v.reducers)) {
       p.reducers = p.reducers.concat(v.reducers);
-    } else if ((0, _typeof3.default)(v.reducers) === 'object') {
+    } else if (_typeof(v.reducers) === 'object') {
       p.reducers.push(v.reducers);
     }
 

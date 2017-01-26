@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
 var _reduxImmutablejs = require('@lab009/redux-immutablejs');
 
 var _lodash = require('lodash.map');
@@ -20,12 +16,14 @@ var _reduceReducers2 = _interopRequireDefault(_reduceReducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var combine = function combine() {
   for (var _len = arguments.length, reducers = Array(_len), _key = 0; _key < _len; _key++) {
     reducers[_key] = arguments[_key];
   }
 
-  return _reduceReducers2.default.apply(undefined, (0, _toConsumableArray3.default)((0, _lodash2.default)(reducers, function (v) {
+  return _reduceReducers2.default.apply(undefined, _toConsumableArray((0, _lodash2.default)(reducers, function (v) {
     return typeof v === 'function' ? v : (0, _reduxImmutablejs.combineReducers)(v);
   })));
 };

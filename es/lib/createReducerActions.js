@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _reduxActions = require('redux-actions');
 
@@ -17,7 +15,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var createReducerActions = function createReducerActions(o, ns) {
-  if ((typeof o === 'undefined' ? 'undefined' : (0, _typeof3.default)(o)) !== 'object') {
+  if ((typeof o === 'undefined' ? 'undefined' : _typeof(o)) !== 'object') {
     throw new Error('Passed an invalid reducer config - must be an object');
   }
   return (0, _lodash2.default)(o, function (prev, v, k) {
@@ -29,7 +27,7 @@ var createReducerActions = function createReducerActions(o, ns) {
       return prev;
     }
 
-    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) === 'object') {
+    if ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) === 'object') {
       prev[k] = createReducerActions(v, name);
       return prev;
     }

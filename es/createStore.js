@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('C:\\cygwin64\\home\\o.orlov\\projects\\teide\\node_modules\\babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
 var _redux = require('redux');
 
 var _immutable = require('immutable');
@@ -34,11 +30,10 @@ var _transformPlugins2 = _interopRequireDefault(_transformPlugins);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var identity = function identity(v) {
-  return v;
-};
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var devtools = typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension() : identity;
+// If Redux DevTools Extension is installed use it, otherwise use Redux compose
+var composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : _redux.compose;
 
 var defaultEnhancers = [(0, _reduxBatchedSubscribe.batchedSubscribe)(_reactDom.unstable_batchedUpdates)];
 var defaultMiddleware = [_reduxThunk2.default];
@@ -64,16 +59,16 @@ exports.default = function (_ref) {
 
   // take in the options and reconcile them with the plugins provided
   var pluginValues = (0, _transformPlugins2.default)(plugins);
-  var finalReducers = [].concat((0, _toConsumableArray3.default)(reducers), (0, _toConsumableArray3.default)(pluginValues.reducers));
-  var finalMiddleware = [].concat(defaultMiddleware, (0, _toConsumableArray3.default)(middleware), (0, _toConsumableArray3.default)(pluginValues.middleware));
-  var finalEnhancers = [].concat(defaultEnhancers, (0, _toConsumableArray3.default)(enhancers), (0, _toConsumableArray3.default)(pluginValues.enhancers), [devtools]);
-  var finalHooks = [].concat((0, _toConsumableArray3.default)(hooks), (0, _toConsumableArray3.default)(pluginValues.hooks));
+  var finalReducers = [].concat(_toConsumableArray(reducers), _toConsumableArray(pluginValues.reducers));
+  var finalMiddleware = [].concat(defaultMiddleware, _toConsumableArray(middleware), _toConsumableArray(pluginValues.middleware));
+  var finalEnhancers = [].concat(defaultEnhancers, _toConsumableArray(enhancers), _toConsumableArray(pluginValues.enhancers));
+  var finalHooks = [].concat(_toConsumableArray(hooks), _toConsumableArray(pluginValues.hooks));
 
-  var store = (0, _redux.createStore)(_combineReducers2.default.apply(undefined, (0, _toConsumableArray3.default)(finalReducers)), initialState, _redux.compose.apply(undefined, [_redux.applyMiddleware.apply(undefined, (0, _toConsumableArray3.default)(finalMiddleware))].concat((0, _toConsumableArray3.default)(finalEnhancers))));
+  var store = (0, _redux.createStore)(_combineReducers2.default.apply(undefined, _toConsumableArray(finalReducers)), initialState, composeEnhancers.apply(undefined, [_redux.applyMiddleware.apply(undefined, _toConsumableArray(finalMiddleware))].concat(_toConsumableArray(finalEnhancers))));
 
   store.replaceReducers = function (newReducers) {
     if (!Array.isArray(newReducers)) throw new Error('Invalid newReducers option');
-    return store.replaceReducer(_combineReducers2.default.apply(undefined, (0, _toConsumableArray3.default)(newReducers).concat((0, _toConsumableArray3.default)(pluginValues.reducers))));
+    return store.replaceReducer(_combineReducers2.default.apply(undefined, _toConsumableArray(newReducers).concat(_toConsumableArray(pluginValues.reducers))));
   };
 
   // apply hooks
