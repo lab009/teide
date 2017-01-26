@@ -10,7 +10,7 @@ import transformPlugins from './lib/transformPlugins'
 
 // If Redux DevTools Extension is installed use it, otherwise use Redux compose
 const composeEnhancers =
-  typeof window === 'object' &&
+  typeof window !== 'undefined' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
 
