@@ -8,11 +8,11 @@ import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import combineReducers from './lib/combineReducers'
 import transformPlugins from './lib/transformPlugins'
 
-const identity = v => v
-
-const devtools = typeof window !== 'undefined' && window.devToolsExtension
-  ? window.devToolsExtension()
-  : identity
+// If Redux DevTools Extension is installed use it, otherwise use Redux compose
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
 
 const defaultEnhancers = [
   batchedSubscribe(batchedUpdates),
@@ -49,7 +49,6 @@ export default ({
     ...defaultEnhancers,
     ...enhancers,
     ...pluginValues.enhancers,
-    devtools,
   ]
   const finalHooks = [
     ...hooks,
@@ -59,7 +58,7 @@ export default ({
   const store = createStore(
     combineReducers(...finalReducers),
     initialState,
-    compose(
+    composeEnhancers(
       applyMiddleware(...finalMiddleware),
       ...finalEnhancers,
     ),
