@@ -1,70 +1,12 @@
 {
-  "name": "@lab009/teide",
-  "version": "2.0.2",
-  "description": "Toolkit for building redux/react applications",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lab009/teide.git"
-  },
-  "author": "Oleg Orlov <mail@orlovoleg.com>",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "module": "es/index.js",
-  "files": [
-    "dist",
-    "es"
-  ],
+  "private": true,
   "scripts": {
-    "preversion": "npm run clean && npm run check && npm run build",
-    "clean": "rimraf dist es",
-    "lint": "eslint src test",
-    "test": "cross-env BABEL_ENV=commonjs ava",
-    "check": "npm run lint && npm run test",
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir dist",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build": "npm run build:commonjs && npm run build:es"
-  },
-  "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
-  },
-  "dependencies": {
-    "@lab009/redux-immutablejs": "1.0.0",
-    "immutable": "3.8.1",
-    "lodash.filter": "4.6.0",
-    "lodash.foreach": "4.5.0",
-    "lodash.map": "4.6.0",
-    "lodash.mapvalues": "4.6.0",
-    "lodash.reduce": "4.6.0",
-    "lodash.values": "4.3.0",
-    "react-immutable-proptypes": "2.1.0",
-    "react-redux": "5.0.2",
-    "reduce-reducers": "0.1.2",
-    "redux": "3.6.0",
-    "redux-actions": "1.2.1",
-    "redux-batched-subscribe": "0.1.6",
-    "redux-thunk": "2.2.0"
+    "changelog": "lerna-changelog",
+    "postinstall": "lerna bootstrap",
+    "publish": "lerna publish --exact --skip-git"
   },
   "devDependencies": {
-    "@lab009/babel-preset-lab009": "2.0.0",
-    "@lab009/eslint-config-lab009": "2.1.0",
-    "ava": "0.17.0",
-    "babel-cli": "6.22.2",
-    "babel-core": "6.22.1",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-register": "6.22.0",
-    "cross-env": "3.1.4",
-    "eslint": "3.14.1",
-    "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-jsx-a11y": "3.0.2",
-    "eslint-plugin-react": "6.9.0",
-    "react": "15.4.2",
-    "react-dom": "15.4.2",
-    "rimraf": "2.5.4"
-  },
-  "ava": {
-    "require": [
-      "babel-register"
-    ]
+    "lerna": "2.0.0-beta.37",
+    "lerna-changelog": "0.2.3"
   }
 }

@@ -1,7 +1,0 @@
-{
-  "root": true,
-  "extends": "@lab009/eslint-config-lab009",
-  "globals": {
-    "window": false
-  }
-}

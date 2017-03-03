@@ -1,0 +1,89 @@
+{
+  "name": "@lab009/teide",
+  "version": "2.0.2",
+  "description": "Toolkit for building redux/react applications",
+  "repository": "lab009/teide",
+  "bugs": {
+    "url": "https://github.com/lab009/teide/issues"
+  },
+  "author": "Oleg Orlov <mail@orlovoleg.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "es/index.js",
+  "files": [
+    "dist",
+    "es"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "scripts": {
+    "build": "yarn run build:commonjs && yarn run build:es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel --ignore **/__tests__ ./src -d ./dist",
+    "build:es": "cross-env BABEL_ENV=es  babel --ignore **/__tests__ ./src -d ./es",
+    "check": "yarn run lint && yarn run test",
+    "clean": "rimraf ./dist && rimraf ./es && rimraf ./coverage && rimraf ./flow-coverage",
+    "lint": "eslint src",
+    "preversion": "yarn run clean && yarn run build",
+    "test": "jest",
+    "test:coverage": "yarn run test -- --coverage",
+    "test:coverage:deploy": "yarn run test:coverage && codecov"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
+  "dependencies": {
+    "immutable": "3.8.1",
+    "lodash.filter": "4.6.0",
+    "lodash.foreach": "4.5.0",
+    "lodash.map": "4.6.0",
+    "lodash.mapvalues": "4.6.0",
+    "lodash.reduce": "4.6.0",
+    "lodash.values": "4.3.0",
+    "react-immutable-proptypes": "2.1.0",
+    "react-redux": "5.0.3",
+    "reduce-reducers": "0.1.2",
+    "redux": "3.6.0",
+    "redux-actions": "1.2.2",
+    "redux-batched-subscribe": "0.1.6",
+    "redux-immutable": "3.1.0",
+    "redux-thunk": "2.2.0"
+  },
+  "devDependencies": {
+    "@lab009/babel-preset-magma": "3.0.2",
+    "@lab009/eslint-config-magma": "3.0.3",
+    "babel-cli": "6.23.0",
+    "babel-core": "6.23.1",
+    "babel-jest": "19.0.0",
+    "codecov": "1.0.1",
+    "cross-env": "3.1.4",
+    "enzyme": "2.7.1",
+    "enzyme-to-json": "1.5.0",
+    "eslint": "3.16.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.0",
+    "jest": "19.0.2",
+    "react": "15.4.2",
+    "react-addons-test-utils": "15.4.2",
+    "react-dom": "15.4.2",
+    "rimraf": "2.6.1",
+    "sinon": "1.17.7"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(dist|coverage|flow-typed|node_modules|tools|es)/"
+    ]
+  }
+}
