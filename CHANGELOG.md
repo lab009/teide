@@ -1,5 +1,3 @@
-## v1.0.0 (2017-03-02)
+## v3.0.0 (2017-03-02)
 
-### Added
-
-Version 1.0.0 of the teide.
+Created teide monorepo
