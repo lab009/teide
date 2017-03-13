@@ -1,6 +1,6 @@
 {
   "name": "@lab009/teide",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Toolkit for building redux/react applications",
   "repository": "lab009/teide",
   "bugs": {

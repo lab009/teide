@@ -1,0 +1,76 @@
+{
+  "url": "https://api.github.com/repos/lab009/teide/issues/1",
+  "repository_url": "https://api.github.com/repos/lab009/teide",
+  "labels_url": "https://api.github.com/repos/lab009/teide/issues/1/labels{/name}",
+  "comments_url": "https://api.github.com/repos/lab009/teide/issues/1/comments",
+  "events_url": "https://api.github.com/repos/lab009/teide/issues/1/events",
+  "html_url": "https://github.com/lab009/teide/pull/1",
+  "id": 213756904,
+  "number": 1,
+  "title": "Use custom combineReducers for Immutable",
+  "user": {
+    "login": "Graf009",
+    "id": 940340,
+    "avatar_url": "https://avatars1.githubusercontent.com/u/940340?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Graf009",
+    "html_url": "https://github.com/Graf009",
+    "followers_url": "https://api.github.com/users/Graf009/followers",
+    "following_url": "https://api.github.com/users/Graf009/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Graf009/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Graf009/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Graf009/subscriptions",
+    "organizations_url": "https://api.github.com/users/Graf009/orgs",
+    "repos_url": "https://api.github.com/users/Graf009/repos",
+    "events_url": "https://api.github.com/users/Graf009/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Graf009/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 559597065,
+      "url": "https://api.github.com/repos/lab009/teide/labels/tag:%20internal",
+      "name": "tag: internal",
+      "color": "bfdadc",
+      "default": false
+    }
+  ],
+  "state": "closed",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2017-03-13T12:49:31Z",
+  "updated_at": "2017-03-13T12:49:41Z",
+  "closed_at": "2017-03-13T12:49:39Z",
+  "pull_request": {
+    "url": "https://api.github.com/repos/lab009/teide/pulls/1",
+    "html_url": "https://github.com/lab009/teide/pull/1",
+    "diff_url": "https://github.com/lab009/teide/pull/1.diff",
+    "patch_url": "https://github.com/lab009/teide/pull/1.patch"
+  },
+  "body": "",
+  "closed_by": {
+    "login": "Graf009",
+    "id": 940340,
+    "avatar_url": "https://avatars1.githubusercontent.com/u/940340?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Graf009",
+    "html_url": "https://github.com/Graf009",
+    "followers_url": "https://api.github.com/users/Graf009/followers",
+    "following_url": "https://api.github.com/users/Graf009/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Graf009/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Graf009/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Graf009/subscriptions",
+    "organizations_url": "https://api.github.com/users/Graf009/orgs",
+    "repos_url": "https://api.github.com/users/Graf009/repos",
+    "events_url": "https://api.github.com/users/Graf009/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Graf009/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}
