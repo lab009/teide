@@ -39,7 +39,7 @@ const checkResponce = ({ res, options }) => {
   }
 }
 
-const sendRequest = ({ options, dispatch }) => {
+const handleAction = ({ options, dispatch }) => {
   dispatch({
     type: 'erebus.request',
     payload: options,
@@ -74,4 +74,4 @@ const sendRequest = ({ options, dispatch }) => {
     })
 }
 
-export default sendRequest
+export default handleAction

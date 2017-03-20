@@ -1,6 +1,6 @@
 import mapValues from 'lodash.mapvalues'
 import merge from 'lodash.merge'
-import sendRequest from './sendRequest'
+import handleAction from './handleAction'
 
 const reserved = [
   'onResponse',
@@ -33,6 +33,7 @@ const result = (fn, ...arg) => (typeof fn === 'function' ? fn(...arg) : fn)
  - token (optional)(string)
  - locale (optional)(string)
  - auth (optional)(array)
+ - type (optional)(string)
 
 
  all options can either be a value, or a function that returns a value.
@@ -61,7 +62,7 @@ const createAction = (defaults = {}) => (opt = {}) => (dispatch, getState) => {
   if (!options.method) throw new Error('Missing method')
   if (!options.endpoint) throw new Error('Missing endpoint')
 
-  const reqPromise = sendRequest({ options, dispatch })
+  const reqPromise = handleAction({ options, dispatch })
   reqPromise.catch(noop)
 
   if (options.onResponse) reqPromise.then(options.onResponse, noop)
