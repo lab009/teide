@@ -9,9 +9,10 @@ export default class DataComponent extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.tryResolveData()
   }
+
   componentDidUpdate() {
     if (!this.handleResolved) return
     if (this._resolved) return
@@ -28,6 +29,7 @@ export default class DataComponent extends Component {
       (this.isPropResolving(prop) ? prev.push(prop) : prev)
     , List())
   }
+
   getErrors() {
     // has keys that have an error = data key
     return fromJS(this.constructor.storeProps).reduce((prev, cursor, prop) =>
@@ -36,6 +38,7 @@ export default class DataComponent extends Component {
         : prev)
     , Map())
   }
+
   getResolvedData() {
     return Object.keys(this.constructor.storeProps).reduce((prev, prop) => {
       const val = this.props[prop]
@@ -58,12 +61,15 @@ export default class DataComponent extends Component {
       (Iterable.isIterable(this.props[prop]) &&
       this.props[prop].get('pending') === true)
   }
+
   isPropErrored(prop) {
     return Iterable.isIterable(this.props[prop]) && this.props[prop].get('error') != null
   }
+
   isResolving() {
     return !this.isErrored() && !this.getResolvingFields().isEmpty()
   }
+
   isErrored() {
     return !this.getErrors().isEmpty()
   }
@@ -72,10 +78,12 @@ export default class DataComponent extends Component {
   renderLoader() {
     return null
   }
+
   // eslint-disable-next-line class-methods-use-this
   renderErrors() {
     return null
   }
+
   // eslint-disable-next-line class-methods-use-this
   renderData() {
     return null
