@@ -1,0 +1,15 @@
+{
+  "env": {
+    "commonjs": {
+      "presets": [
+        ["@lab009/babel-preset-magma", {"modules": "commonjs"}]
+      ]
+    },
+
+    "es": {
+      "presets": [
+        "@lab009/babel-preset-magma"
+      ]
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "name": "@lab009/erebus",
+  "version": "3.0.1",
+  "description": "Dead-simple API actions for Redux",
+  "repository": "lab009/teide",
+  "bugs": {
+    "url": "https://github.com/lab009/teide/issues"
+  },
+  "author": "Oleg Orlov <mail@orlovoleg.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "es/index.js",
+  "files": [
+    "dist",
+    "es"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "scripts": {
+    "build": "yarn run build:commonjs && yarn run build:es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel --ignore **/__tests__ ./src -d ./dist",
+    "build:es": "cross-env BABEL_ENV=es  babel --ignore **/__tests__ ./src -d ./es",
+    "check": "yarn run lint && yarn run test",
+    "clean": "rimraf ./dist && rimraf ./es && rimraf ./coverage && rimraf ./flow-coverage",
+    "lint": "eslint src",
+    "preversion": "yarn run clean && yarn run build",
+    "test": "cross-env BABEL_ENV=commonjs jest",
+    "test:coverage": "yarn run test -- --coverage",
+    "test:coverage:deploy": "yarn run test:coverage && codecov"
+  },
+  "dependencies": {
+    "immutable": "3.8.1",
+    "lodash.mapvalues": "4.6.0",
+    "lodash.merge": "4.6.0",
+    "normalizr": "2.2.1",
+    "reduce-reducers": "0.1.2",
+    "redux-actions": "1.2.2",
+    "superagent": "3.5.0"
+  },
+  "devDependencies": {
+    "@lab009/babel-preset-magma": "3.1.0",
+    "@lab009/eslint-config-magma": "3.0.4",
+    "babel-cli": "6.24.0",
+    "babel-core": "6.24.0",
+    "babel-jest": "19.0.0",
+    "codecov": "1.0.1",
+    "cross-env": "3.2.3",
+    "enzyme": "2.7.1",
+    "enzyme-to-json": "1.5.0",
+    "eslint": "3.17.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.0",
+    "jest": "19.0.2",
+    "react": "15.4.2",
+    "react-addons-test-utils": "15.4.2",
+    "react-dom": "15.4.2",
+    "rimraf": "2.6.1",
+    "sinon": "1.17.7"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(dist|coverage|flow-typed|node_modules|tools|es)/"
+    ]
+  }
+}
