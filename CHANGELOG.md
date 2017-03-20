@@ -1,3 +1,20 @@
+## v3.1.0 (2017-03-20)
+
+#### :rocket: New Feature
+* `erebus`
+  * [#5](https://github.com/lab009/teide/pull/5) Add erebus. ([@Graf009](https://github.com/Graf009))
+* `teide`
+  * [#4](https://github.com/lab009/teide/pull/4) Add convert action to string. ([@Graf009](https://github.com/Graf009))
+
+#### :house: Internal
+* `teide-data-view`
+  * [#7](https://github.com/lab009/teide/pull/7) Use componentDidMount for side-effect. ([@Graf009](https://github.com/Graf009))
+* `erebus`, `teide-data-view`, `teide-router`, `teide`
+  * [#6](https://github.com/lab009/teide/pull/6) Update dependencies. ([@Graf009](https://github.com/Graf009))
+
+#### Committers: 1
+- Oleg Orlov ([Graf009](https://github.com/Graf009))
+
 ## v3.0.1 (2017-03-13)
 
 #### :house: Internal
