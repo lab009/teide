@@ -11,10 +11,14 @@ const createActions = (actions, dispatch) => {
 
   // wrap function in a dispatch
   if (typeof actions === 'function') {
-    return (...args) => {
+    const actionCreator = (...args) => {
       const action = actions(...args)
       return dispatch(action)
     }
+
+    actionCreator.toString = actions.toString
+
+    return actionCreator
   }
 
   // iterate through objects and do mapping
