@@ -1,3 +1,12 @@
+## 3.1.1 (2017-03-24)
+
+#### :rocket: New Feature
+* `erebus`
+  * [#9](https://github.com/lab009/teide/pull/9) Add accept option Closes [#8](https://github.com/lab009/teide/issues/8). ([@Graf009](https://github.com/Graf009))
+
+#### Committers: 1
+- Oleg Orlov ([Graf009](https://github.com/Graf009))
+
 ## v3.1.0 (2017-03-20)
 
 #### :rocket: New Feature

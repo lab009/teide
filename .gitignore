@@ -1,21 +1,52 @@
+# Build output folders
+dist
+es
+build
+
 # Logs
 logs
 *.log
 
-# Dependencies
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# node-waf configuration
+.lock-wscript
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
 # Debug log from npm
 npm-debug.log
 
-# Jest
-coverage
+# IntelliJ IDE ignore
+.idea
 
-# Build output
-dist
-es
-build
+# Visual Studio Code
+.vscode
+.history
 
-# Flow
-flow-coverage
-flow-typed
+# flow-typed Lib Defs
+flow-typed/
+
+# Flow Coverage Report
+flow-coverage/
+
+# Happypack
+.happypack
+
+# OSX Files
+.DS_Store
+
+# yarn
+yarn-debug.log*
+yarn-error.log*
+
+# lerna changelog
+/.changelog
