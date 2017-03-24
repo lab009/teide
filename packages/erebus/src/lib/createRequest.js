@@ -22,6 +22,7 @@ import sendRequest from './sendRequest'
  - withCredentials (default false)(boolean)
  - auth (optional)(array)
  - type (optional)(string)
+ - accept (optional)(string)
 
 
  all options can either be a value, or a function that returns a value.

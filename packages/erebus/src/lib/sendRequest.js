@@ -4,6 +4,9 @@ const prepareOptions = ({ req, options }) => {
   if (options.type) {
     req.type(options.type)
   }
+  if (options.accept) {
+    req.accept(options.accept)
+  }
   if (options.headers) {
     req.set(options.headers)
   }
