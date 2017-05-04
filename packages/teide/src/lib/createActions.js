@@ -11,14 +11,16 @@ const createActions = (actions, dispatch) => {
 
   // wrap function in a dispatch
   if (typeof actions === 'function') {
-    const actionCreator = (...args) => {
+    const fn = (...args) => {
       const action = actions(...args)
-      return dispatch(action)
+      dispatch(action)
+      return action
     }
-
-    actionCreator.toString = actions.toString
-
-    return actionCreator
+    // Copy meta
+    Object.keys(actions).forEach((k) => {
+      fn[k] = actions[k]
+    })
+    return fn
   }
 
   // iterate through objects and do mapping
