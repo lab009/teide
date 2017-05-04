@@ -1,6 +1,6 @@
 {
   "name": "@lab009/teide-data-view",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Lightweight data view abstraction for managing fetching/loaded/errored states for remote data",
   "repository": "lab009/teide",
   "bugs": {
@@ -33,14 +33,14 @@
     "test:coverage:deploy": "yarn run test:coverage && codecov"
   },
   "peerDependencies": {
-    "@lab009/teide": "3.1.0"
+    "@lab009/teide": "3.2.0"
   },
   "dependencies": {
     "immutable": "3.8.1"
   },
   "devDependencies": {
     "@lab009/babel-preset-magma": "3.3.3",
-    "@lab009/teide": "3.1.0",
+    "@lab009/teide": "3.2.0",
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
     "babel-jest": "19.0.0",

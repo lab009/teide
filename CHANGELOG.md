@@ -1,3 +1,27 @@
+## 3.2.0 (2017-05-04)
+
+#### :rocket: New Feature
+* `erebus`
+  * [#16](https://github.com/lab009/teide/pull/16) Expose meta on actions. ([@Graf009](https://github.com/Graf009))
+* `teide`
+  * [#13](https://github.com/lab009/teide/pull/13) Copy action meta. ([@Graf009](https://github.com/Graf009))
+
+#### :bug: Bug Fix
+* `teide-data-view`
+  * [#15](https://github.com/lab009/teide/pull/15) Fix issue where null values were marked as resolving. ([@Graf009](https://github.com/Graf009))
+* `teide`
+  * [#14](https://github.com/lab009/teide/pull/14) Fix mergeProps order, own props should always be top dog. ([@Graf009](https://github.com/Graf009))
+
+#### :nail_care: Enhancement
+* `erebus`, `teide`
+  * [#12](https://github.com/lab009/teide/pull/12) Use only lodash. ([@Graf009](https://github.com/Graf009))
+* `erebus`, `teide-data-view`, `teide-router`, `teide`
+  * [#11](https://github.com/lab009/teide/pull/11) Use global eslint and prettier. ([@Graf009](https://github.com/Graf009))
+  * [#10](https://github.com/lab009/teide/pull/10) Update dependencies. ([@Graf009](https://github.com/Graf009))
+
+#### Committers: 1
+- Oleg Orlov ([Graf009](https://github.com/Graf009))
+
 ## 3.1.1 (2017-03-24)
 
 #### :rocket: New Feature
