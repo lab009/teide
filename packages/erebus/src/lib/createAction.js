@@ -74,6 +74,8 @@ const createAction = (defaults = {}) => (opt = {}) => (dispatch, getState) => {
     return this.then(undefined, cb)
   }
 
+  actionPromise.options = options
+
   return actionPromise
 }
 
