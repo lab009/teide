@@ -27,7 +27,7 @@
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel --ignore **/__tests__ ./src -d ./dist",
     "build:es": "cross-env BABEL_ENV=es  babel --ignore **/__tests__ ./src -d ./es",
     "clean": "rimraf ./dist && rimraf ./es && rimraf ./coverage && rimraf ./flow-coverage",
-    "preversion": "yarn run clean && yarn run build",
+    "release": "yarn run clean && yarn run build",
     "test": "cross-env BABEL_ENV=commonjs jest",
     "test:coverage": "yarn run test -- --coverage",
     "test:coverage:deploy": "yarn run test:coverage && codecov"

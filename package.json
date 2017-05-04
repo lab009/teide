@@ -5,6 +5,8 @@
     "postinstall": "lerna bootstrap",
     "bootstrap": "lerna bootstrap",
     "publish": "lerna publish --exact --skip-git",
+    "release": "lerna run release",
+    "test": "lerna run test",
     "lint": "eslint \"packages/*/*.js\" \"packages/*/!(node_modules|dist|es)/**/*.js\"",
     "format": "prettier-eslint --write \"packages/*/*.js\" \"packages/*/!(node_modules|dist|es)/**/*.js\""
   },
