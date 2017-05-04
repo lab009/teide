@@ -57,32 +57,33 @@ export default class UserList extends DataComponent {
   renderData({ users }) {
     return (
       <div>
-        <div>Users</div>
+        <h1>{users.size} Users</h1>
+        <ul>
         {
           users.map(user =>
-            <Media key={user.get('id')} align="center" img={user.get('image')}>
-              <Heading level={3}>{user.get('name')}</Heading>
-            </Media>
+            <li key={user.get('id')}>{user.get('name')}</li>
           )
         }
+        </ul>
       </div>
+    )
+  }
+
+  renderLoader () {
+    return (
+      <h1>Loading...</h1>
     )
   }
 
   renderErrors(errors) {
     return (
-      <div>
-        <div>Users</div>
-        <div>Failed to Load!</div>
+      <ul>
         {
           errors.map((err, field) =>
-            <Media key={field} align="center">
-              <Heading level={3}>{field}</Heading>
-              <Text>{err.message}</Text>
-            </Media>
-          ).toArray()
+            <li key={field}>{field}: {err.message}</li>
+          )
         }
-      </div>
+      </ul>
     )
   }
 }
