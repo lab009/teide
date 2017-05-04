@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import map from 'lodash.map'
+import map from 'lodash/map'
 import reduceReducers from 'reduce-reducers'
 
 const validateNextState = (nextState, reducerName, action) => {

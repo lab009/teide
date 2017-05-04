@@ -33,8 +33,7 @@
   },
   "dependencies": {
     "immutable": "3.8.1",
-    "lodash.mapvalues": "4.6.0",
-    "lodash.merge": "4.6.0",
+    "lodash": "4.17.4",
     "normalizr": "2.2.1",
     "reduce-reducers": "0.1.2",
     "redux-actions": "2.0.2",

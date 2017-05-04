@@ -1,4 +1,4 @@
-import reduce from 'lodash.reduce'
+import reduce from 'lodash/reduce'
 
 export default (plugins) => {
   if (!Array.isArray(plugins)) throw new Error('Invalid plugins argument')

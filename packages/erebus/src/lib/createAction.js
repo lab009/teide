@@ -1,5 +1,5 @@
-import mapValues from 'lodash.mapvalues'
-import merge from 'lodash.merge'
+import mapValues from 'lodash/mapValues'
+import merge from 'lodash/merge'
 import handleAction from './handleAction'
 
 const reserved = ['onResponse', 'onError']

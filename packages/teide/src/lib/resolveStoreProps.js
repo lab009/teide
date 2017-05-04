@@ -1,4 +1,4 @@
-import mapValues from 'lodash.mapvalues'
+import mapValues from 'lodash/mapValues'
 
 // supports array of strings, strings with dot, or function
 const lookup = (o, k, args) => {

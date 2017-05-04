@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'
-import reduce from 'lodash.reduce'
+import reduce from 'lodash/reduce'
 
 const createReducerActions = (o, ns) => {
   if (typeof o !== 'object') {

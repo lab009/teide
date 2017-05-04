@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { Map, Iterable } from 'immutable'
 import thunk from 'redux-thunk'
-import each from 'lodash.foreach'
+import each from 'lodash/forEach'
 import { batchedSubscribe } from 'redux-batched-subscribe'
 import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 
