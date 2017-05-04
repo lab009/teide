@@ -10,24 +10,28 @@ import { Map, Iterable } from 'immutable'
 // container - an object that contains initialState + reducer functions
 // initialState - the default state of a node and its children
 
-const isFunction = v => (typeof v === 'function')
+const isFunction = v => typeof v === 'function'
 
 const getInitialState = (o, ns) =>
-  reduce(o, (prev, v, k) => {
-    if (k === 'initialState') return prev
-    const name = ns ? `${ns}.${k}` : k
+  reduce(
+    o,
+    (prev, v, k) => {
+      if (k === 'initialState') return prev
+      const name = ns ? `${ns}.${k}` : k
 
-    if (typeof v === 'object') {
-      if (!Map.isMap(prev)) {
-        throw new Error(`Reducer "${ns || 'root'}" has a non-map initialState, so it can't have children`)
+      if (typeof v === 'object') {
+        if (!Map.isMap(prev)) {
+          throw new Error(`Reducer "${ns || 'root'}" has a non-map initialState, so it can't have children`)
+        }
+        if (typeof prev.get(k) !== 'undefined') {
+          throw new Error(`Reducer "${ns || 'root'}" has an initialState conflict with it's parent over "${k}"`)
+        }
+        return prev.set(k, getInitialState(v, name))
       }
-      if (typeof prev.get(k) !== 'undefined') {
-        throw new Error(`Reducer "${ns || 'root'}" has an initialState conflict with it's parent over "${k}"`)
-      }
-      return prev.set(k, getInitialState(v, name))
-    }
-    return prev
-  }, o.initialState || Map())
+      return prev
+    },
+    o.initialState || Map(),
+  )
 
 const createReducerNode = ({ name, statePath, reducer, initialState }) => (state, action = {}) => {
   // if we are the reducer container, pass them our cherry-picked state
@@ -49,21 +53,24 @@ const createReducerNode = ({ name, statePath, reducer, initialState }) => (state
 // array of reducers that handle namespaced actions
 const createReducers = (o, parentName) => {
   let hadReducers = false
-  const reducers = filter(mapValues(o, (v, k) => {
-    if (k === 'initialState') return
-    const name = parentName ? `${parentName}.${k}` : k
+  const reducers = filter(
+    mapValues(o, (v, k) => {
+      if (k === 'initialState') return
+      const name = parentName ? `${parentName}.${k}` : k
 
-    if (isFunction(v)) {
-      hadReducers = true
-      // eslint-disable-next-line consistent-return
-      return handleAction(name, v, null)
-    }
+      if (isFunction(v)) {
+        hadReducers = true
+        // eslint-disable-next-line consistent-return
+        return handleAction(name, v, null)
+      }
 
-    if (typeof v === 'object') {
-      // eslint-disable-next-line no-use-before-define, consistent-return
-      return createReducer(v, name)
-    }
-  }), isFunction)
+      if (typeof v === 'object') {
+        // eslint-disable-next-line no-use-before-define, consistent-return
+        return createReducer(v, name)
+      }
+    }),
+    isFunction,
+  )
 
   return {
     name: parentName,

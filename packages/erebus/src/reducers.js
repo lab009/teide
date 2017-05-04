@@ -40,9 +40,7 @@ const setSubsetData = (state, { meta: { subset }, payload: { raw, normalized } }
   return state.updateIn(path, subsetState =>
     subsetState
       .set('data', fromJS(raw))
-      .set('entities', normalized
-        ? Set(ensureArray(normalized.result))
-        : Set())
+      .set('entities', normalized ? Set(ensureArray(normalized.result)) : Set())
       .set('pending', false)
       .set('error', null),
   )
@@ -52,18 +50,16 @@ const setSubsetError = (state, { meta: { subset }, payload }) => {
   if (!subset) return state
   const path = ['subsets', subset]
   if (!state.hasIn(path)) return state // subset doesnt exist
-  return state.updateIn(path, subsetState =>
-    subsetState
-      .delete('data')
-      .delete('entities')
-      .set('error', payload)
-      .set('pending', false),
-  )
+  return state.updateIn(path, subsetState => subsetState.delete('data').delete('entities').set('error', payload).set('pending', false))
 }
 
 // exported actions
-export const api = handleActions({ // eslint-disable-line import/prefer-default-export
-  'erebus.request': createSubset,
-  'erebus.failure': setSubsetError,
-  'erebus.success': compose(setSubsetData, addEntities),
-}, initialState)
+export const api = handleActions(
+  {
+    // eslint-disable-line import/prefer-default-export
+    'erebus.request': createSubset,
+    'erebus.failure': setSubsetError,
+    'erebus.success': compose(setSubsetData, addEntities),
+  },
+  initialState,
+)

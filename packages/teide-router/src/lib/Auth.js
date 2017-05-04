@@ -25,10 +25,7 @@ export default class Auth extends Component {
   }
 
   render() {
-    invariant(
-      false,
-      '<Auth> elements are for router configuration only and should not be rendered',
-    )
+    invariant(false, '<Auth> elements are for router configuration only and should not be rendered')
     return null
   }
 }

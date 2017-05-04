@@ -15,5 +15,4 @@ const lookup = (o, k, args) => {
 // - function that returns an array of strings
 // it will then dive into an immutable object and grab all of these storeProps
 // and return the same object, but where the values are the resolved data
-export default (storeProps, storeState, props) =>
-  mapValues(storeProps, v => lookup(storeState, v, [storeState, props]))
+export default (storeProps, storeState, props) => mapValues(storeProps, v => lookup(storeState, v, [storeState, props]))

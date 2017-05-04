@@ -9,13 +9,7 @@ const defaults = {
 }
 
 export default (options) => {
-  const {
-    authSelector,
-    failureRedirectPath,
-    predicate,
-    allowRedirectBack,
-    redirectAction,
-  } = {
+  const { authSelector, failureRedirectPath, predicate, allowRedirectBack, redirectAction } = {
     ...defaults,
     ...options,
   }

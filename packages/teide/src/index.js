@@ -11,7 +11,7 @@ import createReducerActions from './lib/createReducerActions'
 import combineReducers from './lib/combineReducers'
 
 class TeideComponent extends ReactComponent {
-  static defaultState = {};
+  static defaultState = {}
   constructor(...args) {
     super(...args)
     this.state = {

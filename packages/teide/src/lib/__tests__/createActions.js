@@ -1,13 +1,16 @@
 import createActions from '../createActions'
 
 it('should create from a flat string object', () => {
-  const actions = createActions({
-    one: 'one',
-    two: 'two',
-  }, (action) => {
-    expect(action).toBeTruthy()
-    return action
-  })
+  const actions = createActions(
+    {
+      one: 'one',
+      two: 'two',
+    },
+    (action) => {
+      expect(action).toBeTruthy()
+      return action
+    },
+  )
   expect(actions.one).toBeTruthy()
   expect(actions.two).toBeTruthy()
 
@@ -16,17 +19,20 @@ it('should create from a flat string object', () => {
 })
 
 it('should create from a nested string object', () => {
-  const actions = createActions({
-    one: {
-      half: 'one',
+  const actions = createActions(
+    {
+      one: {
+        half: 'one',
+      },
+      two: {
+        half: 'two',
+      },
     },
-    two: {
-      half: 'two',
+    (action) => {
+      expect(action).toBeTruthy()
+      return action
     },
-  }, (action) => {
-    expect(action).toBeTruthy()
-    return action
-  })
+  )
   expect(actions.one.half).toBeTruthy()
   expect(actions.two.half).toBeTruthy()
 
@@ -35,13 +41,16 @@ it('should create from a nested string object', () => {
 })
 
 it('should create from a flat function object', () => {
-  const actions = createActions({
-    one: () => ({}),
-    two: () => ({}),
-  }, (action) => {
-    expect(action).toBeTruthy()
-    return action
-  })
+  const actions = createActions(
+    {
+      one: () => ({}),
+      two: () => ({}),
+    },
+    (action) => {
+      expect(action).toBeTruthy()
+      return action
+    },
+  )
   expect(actions.one).toBeTruthy()
   expect(actions.two).toBeTruthy()
 

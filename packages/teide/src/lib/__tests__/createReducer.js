@@ -28,12 +28,8 @@ it('should combine a nested reducer', () => {
 
   expect(reducer).toBeTruthy()
   expect(typeof reducer).toBe('function')
-  expect(
-    reducer(initialState, { type: 'counter.increment' }).getIn(['counter', 'count']),
-  ).toBe(2)
-  expect(
-    reducer(initialState, { type: 'counter.decrement' }).getIn(['counter', 'count']),
-  ).toBe(0)
+  expect(reducer(initialState, { type: 'counter.increment' }).getIn(['counter', 'count'])).toBe(2)
+  expect(reducer(initialState, { type: 'counter.decrement' }).getIn(['counter', 'count'])).toBe(0)
 })
 
 it('should combine a really nested reducer', () => {
@@ -50,12 +46,8 @@ it('should combine a really nested reducer', () => {
 
   expect(reducer).toBeTruthy()
   expect(typeof reducer).toBe('function')
-  expect(
-    reducer(initialState, { type: 'another.counter.increment' }).getIn(['another', 'counter', 'count']),
-  ).toBe(2)
-  expect(
-    reducer(initialState, { type: 'another.counter.decrement' }).getIn(['another', 'counter', 'count']),
-  ).toBe(0)
+  expect(reducer(initialState, { type: 'another.counter.increment' }).getIn(['another', 'counter', 'count'])).toBe(2)
+  expect(reducer(initialState, { type: 'another.counter.decrement' }).getIn(['another', 'counter', 'count'])).toBe(0)
 })
 
 it('should combine a really really nested reducer', () => {
@@ -77,12 +69,22 @@ it('should combine a really really nested reducer', () => {
   expect(reducer).toBeTruthy()
   expect(typeof reducer).toBe('function')
   expect(
-    reducer(initialState, { type: 'another.another.another.counter.increment' })
-      .getIn(['another', 'another', 'another', 'counter', 'count']),
+    reducer(initialState, { type: 'another.another.another.counter.increment' }).getIn([
+      'another',
+      'another',
+      'another',
+      'counter',
+      'count',
+    ]),
   ).toBe(2)
   expect(
-    reducer(initialState, { type: 'another.another.another.counter.decrement' })
-      .getIn(['another', 'another', 'another', 'counter', 'count']),
+    reducer(initialState, { type: 'another.another.another.counter.decrement' }).getIn([
+      'another',
+      'another',
+      'another',
+      'counter',
+      'count',
+    ]),
   ).toBe(0)
 })
 
@@ -119,12 +121,8 @@ it('should work with empty root state', () => {
   const initialState = Map()
   expect(reducer).toBeTruthy()
   expect(typeof reducer).toBe('function')
-  expect(
-    reducer(initialState, { type: 'counter.increment' }).getIn(['counter', 'count']),
-  ).toBe(2)
-  expect(
-    reducer(initialState, { type: 'counter.decrement' }).getIn(['counter', 'count']),
-  ).toBe(0)
+  expect(reducer(initialState, { type: 'counter.increment' }).getIn(['counter', 'count'])).toBe(2)
+  expect(reducer(initialState, { type: 'counter.decrement' }).getIn(['counter', 'count'])).toBe(0)
 })
 
 it('shouldnt default node state', () => {

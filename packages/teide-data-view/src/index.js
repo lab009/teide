@@ -25,18 +25,15 @@ export default class DataComponent extends Component {
 
   getResolvingFields() {
     // has keys that are either undefined/null or have a pending = true key
-    return fromJS(this.constructor.storeProps).reduce((prev, cursor, prop) =>
-      (this.isPropResolving(prop) ? prev.push(prop) : prev)
-    , List())
+    return fromJS(this.constructor.storeProps).reduce((prev, cursor, prop) => (this.isPropResolving(prop) ? prev.push(prop) : prev), List())
   }
 
   getErrors() {
     // has keys that have an error = data key
-    return fromJS(this.constructor.storeProps).reduce((prev, cursor, prop) =>
-      (this.isPropErrored(prop)
-        ? prev.set(prop, this.props[prop].get('error'))
-        : prev)
-    , Map())
+    return fromJS(this.constructor.storeProps).reduce(
+      (prev, cursor, prop) => (this.isPropErrored(prop) ? prev.set(prop, this.props[prop].get('error')) : prev),
+      Map(),
+    )
   }
 
   getResolvedData() {
@@ -57,9 +54,7 @@ export default class DataComponent extends Component {
   }
 
   isPropResolving(prop) {
-    return this.props[prop] == null ||
-      (Iterable.isIterable(this.props[prop]) &&
-      this.props[prop].get('pending') === true)
+    return this.props[prop] == null || (Iterable.isIterable(this.props[prop]) && this.props[prop].get('pending') === true)
   }
 
   isPropErrored(prop) {

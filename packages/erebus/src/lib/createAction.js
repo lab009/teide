@@ -2,10 +2,7 @@ import mapValues from 'lodash.mapvalues'
 import merge from 'lodash.merge'
 import handleAction from './handleAction'
 
-const reserved = [
-  'onResponse',
-  'onError',
-]
+const reserved = ['onResponse', 'onError']
 const result = (fn, ...arg) => (typeof fn === 'function' ? fn(...arg) : fn)
 
 // TODO: check entities cache in store and dont fetch if we have it already
@@ -40,7 +37,7 @@ const result = (fn, ...arg) => (typeof fn === 'function' ? fn(...arg) : fn)
  if you define a function, it will receive options.params as an argument
  */
 
-const isReserved = k => (reserved.indexOf(k) !== -1)
+const isReserved = k => reserved.indexOf(k) !== -1
 const noop = () => {}
 
 /*
@@ -49,9 +46,8 @@ const noop = () => {}
  opt = options specified in action creator
  state = current state of store
  */
-export const mergeOptions = (defaults, opt, state) => mapValues(
-  merge({}, defaults, opt),
-  (v, k, { params = {} }) => {
+export const mergeOptions = (defaults, opt, state) =>
+  mapValues(merge({}, defaults, opt), (v, k, { params = {} }) => {
     if (isReserved(k)) return v
     return result(v, params, state)
   })

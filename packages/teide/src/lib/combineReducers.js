@@ -4,7 +4,9 @@ import reduceReducers from 'reduce-reducers'
 
 const validateNextState = (nextState, reducerName, action) => {
   if (nextState === undefined) {
-    throw new Error(`Reducer "${reducerName}" returned undefined when handling "${action.type}" action. To ignore an action, you must explicitly return the previous state.`)
+    throw new Error(
+      `Reducer "${reducerName}" returned undefined when handling "${action.type}" action. To ignore an action, you must explicitly return the previous state.`,
+    )
   }
 }
 
@@ -25,7 +27,6 @@ const combineReducers = (reducers, getDefaultState = Immutable.Map) => {
     })
 }
 
-const combine = (...reducers) =>
-  reduceReducers(...map(reducers, v => (typeof v === 'function' ? v : combineReducers(v))))
+const combine = (...reducers) => reduceReducers(...map(reducers, v => (typeof v === 'function' ? v : combineReducers(v))))
 
 export default combine
