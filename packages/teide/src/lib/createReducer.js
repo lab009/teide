@@ -1,9 +1,9 @@
 import { handleAction } from 'redux-actions'
 import reduceReducers from 'reduce-reducers'
-import mapValues from 'lodash.mapvalues'
-import values from 'lodash.values'
-import reduce from 'lodash.reduce'
-import filter from 'lodash.filter'
+import mapValues from 'lodash/mapValues'
+import values from 'lodash/values'
+import reduce from 'lodash/reduce'
+import filter from 'lodash/filter'
 import { Map, Iterable } from 'immutable'
 
 // terminology:

@@ -1,5 +1,5 @@
-import mapValues from 'lodash.mapvalues'
-import merge from 'lodash.merge'
+import mapValues from 'lodash/mapValues'
+import merge from 'lodash/merge'
 
 const result = (fn, ...arg) => (typeof fn === 'function' ? fn(...arg) : fn)
 

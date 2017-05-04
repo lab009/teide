@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'
-import mapValues from 'lodash.mapvalues'
+import mapValues from 'lodash/mapValues'
 
 // equiv of redux createAction but recursive
 
