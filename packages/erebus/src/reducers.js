@@ -21,6 +21,12 @@ const addEntities = (state, { payload: { normalized } }) => {
   return state.mergeDeep(fromJS({ entities: normalized.entities }))
 }
 
+const deleteEntities = (state, { payload: { params, model }  }) => {
+  if (!model) return state
+
+  return state.deleteIn(['entities', model.key, params.get('id').toString()])
+}
+
 // subset state
 const createSubset = (state, { payload: { subset, fresh } }) => {
   if (!subset) return state
@@ -60,6 +66,7 @@ export const api = handleActions(
     'erebus.request': createSubset,
     'erebus.failure': setSubsetError,
     'erebus.success': compose(setSubsetData, addEntities),
+    'erebus.delete': deleteEntities,
   },
   initialState,
 )
