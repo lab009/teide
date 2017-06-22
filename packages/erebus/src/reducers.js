@@ -27,6 +27,8 @@ const deleteEntities = (state, { payload: { params, model }  }) => {
   return state.deleteIn(['entities', model.key, params.get('id').toString()])
 }
 
+const reset = () => initialState
+
 // subset state
 const createSubset = (state, { payload: { subset, fresh } }) => {
   if (!subset) return state
@@ -67,6 +69,7 @@ export const api = handleActions(
     'erebus.failure': setSubsetError,
     'erebus.success': compose(setSubsetData, addEntities),
     'erebus.delete': deleteEntities,
+    'erebus.reset': reset,
   },
   initialState,
 )
