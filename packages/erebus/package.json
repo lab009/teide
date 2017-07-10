@@ -1,6 +1,6 @@
 {
   "name": "@lab009/erebus",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "Dead-simple API actions for Redux",
   "repository": "lab009/teide",
   "bugs": {
