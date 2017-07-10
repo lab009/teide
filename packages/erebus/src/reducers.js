@@ -14,11 +14,20 @@ const ensureArray = data => (Array.isArray(data) ? data : [data])
 // - subsets become lists of IDs and entity types
 
 // shallow entity state
-const addEntities = (state, { payload: { normalized } }) => {
+const addEntities = (state, { meta: { forceUpdate }, payload: { normalized } }) => {
   if (!normalized) return state
   // TODO entity not work
   // return fromJS({ entities: normalized.entities }).mergeDeep(state)
-  return state.mergeDeep(fromJS({ entities: normalized.entities }))
+  // return state.mergeDeep(fromJS({ entities: normalized.entities }))
+  if ( !forceUpdate ) return state.mergeDeep(fromJS({ entities: normalized.entities }))
+
+  const entities = fromJS(normalized.entities)
+
+  return state.withMutations((temporaryState) => {
+    entities.map( (entity, key) => {
+      temporaryState.setIn(['entities', key], entity)
+    })
+  })
 }
 
 const deleteEntities = (state, { payload: { params, model }  }) => {
