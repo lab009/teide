@@ -25,6 +25,9 @@ const prepareOptions = ({ req, options }) => {
   if (options.auth) {
     req.auth(...options.auth)
   }
+  if (options.responseType) {
+    req.responseType(options.responseType);
+  }
 }
 
 const checkResponce = ({ res, options }) => {
@@ -33,9 +36,9 @@ const checkResponce = ({ res, options }) => {
   if (!res) {
     throw new Error(`Connection failed: ${debug}`)
   }
-  if (!res.noContent && res.type !== 'application/json') {
-    throw new Error(`Unknown response type: '${res.type}' from ${debug}`)
-  }
+  // if (!res.noContent && res.type !== 'application/json') {
+  //   throw new Error(`Unknown response type: '${res.type}' from ${debug}`)
+  // }
 }
 
 const sendRequest = (options) => {
