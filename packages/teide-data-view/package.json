@@ -1,6 +1,6 @@
 {
   "name": "@lab009/teide-data-view",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Lightweight data view abstraction for managing fetching/loaded/errored states for remote data",
   "main": "dist/index.js",
   "module": "es/index.js",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@lab009/babel-preset-magma": "3.4.3",
-    "@lab009/teide": "3.2.0",
+    "@lab009/teide": "^3.3.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-jest": "22.4.1",

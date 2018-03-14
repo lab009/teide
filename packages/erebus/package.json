@@ -1,6 +1,6 @@
 {
   "name": "@lab009/erebus",
-  "version": "3.2.4",
+  "version": "3.3.0",
   "description": "Dead-simple API actions for Redux",
   "main": "dist/index.js",
   "module": "es/index.js",
