@@ -16,7 +16,14 @@ const composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOL
 const defaultEnhancers = [batchedSubscribe(batchedUpdates)]
 const defaultMiddleware = [thunk]
 
-export default ({ plugins = [], middleware = [], enhancers = [], reducers = [], hooks = [], initialState = Map() }) => {
+export default ({
+  plugins = [],
+  middleware = [],
+  enhancers = [],
+  reducers = [],
+  hooks = [],
+  initialState = Map(),
+}) => {
   if (!Array.isArray(reducers)) throw new Error('Invalid reducers option')
   if (!Array.isArray(middleware)) throw new Error('Invalid middleware option')
   if (!Array.isArray(enhancers)) throw new Error('Invalid enhancers option')
@@ -32,7 +39,7 @@ export default ({ plugins = [], middleware = [], enhancers = [], reducers = [], 
   const store = createStore(
     combineReducers(...finalReducers),
     initialState,
-    composeEnhancers(applyMiddleware(...finalMiddleware), ...finalEnhancers),
+    composeEnhancers(applyMiddleware(...finalMiddleware), ...finalEnhancers)
   )
 
   store.replaceReducers = (newReducers) => {

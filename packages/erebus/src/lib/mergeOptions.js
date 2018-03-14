@@ -13,6 +13,7 @@ export const mergeOption = (obj, option) => (...arg) => ({
  opt = options specified in action creator
  state = current state of store
  */
-const mergeOptions = (defaults, opt, state) => mapValues(merge({}, defaults, opt), (v, k, { params = {} }) => result(v, params, state))
+const mergeOptions = (defaults, opt, state) =>
+  mapValues(merge({}, defaults, opt), (v, k, { params = {} }) => result(v, params, state))
 
 export default mergeOptions

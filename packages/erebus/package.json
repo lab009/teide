@@ -2,65 +2,67 @@
   "name": "@lab009/erebus",
   "version": "3.2.4",
   "description": "Dead-simple API actions for Redux",
-  "repository": "lab009/teide",
-  "bugs": {
-    "url": "https://github.com/lab009/teide/issues"
-  },
-  "author": "Oleg Orlov <mail@orlovoleg.com>",
-  "license": "MIT",
   "main": "dist/index.js",
   "module": "es/index.js",
   "files": [
     "dist",
     "es"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "react",
     "redux"
   ],
+  "author": "Oleg Orlov <mail@orlovoleg.com>",
+  "license": "MPL-2.0",
+  "repository": "https://github.com/lab009/teide/tree/master/packages/erebus",
+  "bugs": "https://github.com/lab009/teide/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^6.9.0 || ^8 || >=9",
+    "npm": ">=5.4.0",
+    "yarn": ">=1.2.1"
+  },
   "scripts": {
-    "build": "yarn run build:commonjs && yarn run build:es",
+    "build": "yarn run clean && yarn run build:commonjs && yarn run build:es",
+    "clean": "rimraf ./dist && rimraf ./es && rimraf ./coverage && rimraf ./flow-coverage",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel --ignore **/__tests__ ./src -d ./dist",
     "build:es": "cross-env BABEL_ENV=es  babel --ignore **/__tests__ ./src -d ./es",
-    "clean": "rimraf ./dist && rimraf ./es && rimraf ./coverage && rimraf ./flow-coverage",
-    "release": "yarn run clean && yarn run build",
     "test": "cross-env BABEL_ENV=commonjs jest",
-    "test:coverage": "yarn run test -- --coverage",
+    "test:coverage": "yarn run test --coverage",
     "test:coverage:deploy": "yarn run test:coverage && codecov"
   },
   "dependencies": {
-    "immutable": "3.8.1",
-    "lodash": "4.17.4",
-    "normalizr": "2.2.1",
+    "immutable": "3.8.2",
+    "lodash": "4.17.5",
+    "normalizr": "3.2.4",
     "reduce-reducers": "0.1.2",
-    "redux-actions": "2.0.2",
-    "superagent": "3.5.2"
+    "redux-actions": "2.3.0",
+    "superagent": "3.8.2"
   },
   "devDependencies": {
-    "@lab009/babel-preset-magma": "3.3.3",
-    "babel-cli": "6.24.1",
-    "babel-core": "6.24.1",
-    "babel-jest": "19.0.0",
-    "codecov": "2.1.0",
-    "cross-env": "4.0.0",
-    "enzyme": "2.8.2",
-    "enzyme-to-json": "1.5.1",
-    "jest": "19.0.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
-    "react-test-renderer": "15.5.4",
-    "rimraf": "2.6.1",
-    "sinon": "2.2.0"
+    "@lab009/babel-preset-magma": "3.4.3",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-jest": "22.4.1",
+    "codecov": "3.0.0",
+    "cross-env": "5.1.4",
+    "enzyme": "3.3.0",
+    "enzyme-to-json": "3.3.1",
+    "jest": "22.4.2",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-test-renderer": "16.2.0",
+    "rimraf": "2.6.2",
+    "sinon": "4.4.5"
   },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
     "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
+      "<rootDir>/../../node_modules/enzyme-to-json/serializer"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/(dist|coverage|flow-typed|node_modules|tools|es)/"

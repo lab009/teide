@@ -19,34 +19,20 @@ coverage
 .lock-wscript
 
 # Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
-# Debug log from npm
+# Debug log
 npm-debug.log
+yarn-error.log
 
-# IntelliJ IDE ignore
+# IDE ignore
 .idea
-
-# Visual Studio Code
 .vscode
 .history
 
-# flow-typed Lib Defs
-flow-typed/
+# Flow
+flow-typed
+flow-coverage
 
-# Flow Coverage Report
-flow-coverage/
-
-# Happypack
-.happypack
-
-# OSX Files
+# System
 .DS_Store
-
-# yarn
-yarn-debug.log*
-yarn-error.log*
-
-# lerna changelog
-/.changelog

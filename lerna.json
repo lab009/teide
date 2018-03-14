@@ -1,17 +1,10 @@
 {
-  "lerna": "2.0.0-rc.4",
-  "version": "independent",
+  "lerna": "2.9.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "3.2.4",
   "npmClient": "yarn",
-  "changelog": {
-    "repo": "lab009/teide",
-    "labels": {
-      "tag: new feature": ":rocket: New Feature",
-      "tag: breaking change": ":boom: Breaking Change",
-      "tag: bug fix": ":bug: Bug Fix",
-      "tag: enhancement": ":nail_care: Enhancement",
-      "tag: documentation": ":memo: Documentation",
-      "tag: internal": ":house: Internal"
-    },
-    "cacheDir": ".changelog"
-  }
+  "registry": "https://registry.npmjs.org/",
+  "useWorkspaces": true
 }

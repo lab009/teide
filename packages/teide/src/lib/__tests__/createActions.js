@@ -7,7 +7,7 @@ describe('createActions', () => {
         one: 'one',
         two: 'two',
       },
-      action => expect(action).toBeTruthy(),
+      action => expect(action).toBeTruthy()
     )
     expect(actions.one).toBeTruthy()
     expect(actions.two).toBeTruthy()
@@ -26,7 +26,7 @@ describe('createActions', () => {
           half: 'two',
         },
       },
-      action => expect(action).toBeTruthy(),
+      action => expect(action).toBeTruthy()
     )
     expect(actions.one.half).toBeTruthy()
     expect(actions.two.half).toBeTruthy()
@@ -41,7 +41,7 @@ describe('createActions', () => {
         one: () => ({}),
         two: () => ({}),
       },
-      action => expect(action).toBeTruthy(),
+      action => expect(action).toBeTruthy()
     )
     expect(actions.one).toBeTruthy()
     expect(actions.two).toBeTruthy()
@@ -59,7 +59,7 @@ describe('createActions', () => {
       {
         one: fn,
       },
-      action => expect(action).toBeTruthy(),
+      action => expect(action).toBeTruthy()
     )
 
     expect(actions.one).toBeTruthy()

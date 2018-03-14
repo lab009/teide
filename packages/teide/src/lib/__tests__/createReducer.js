@@ -75,7 +75,7 @@ it('should combine a really really nested reducer', () => {
       'another',
       'counter',
       'count',
-    ]),
+    ])
   ).toBe(2)
   expect(
     reducer(initialState, { type: 'another.another.another.counter.decrement' }).getIn([
@@ -84,7 +84,7 @@ it('should combine a really really nested reducer', () => {
       'another',
       'counter',
       'count',
-    ]),
+    ])
   ).toBe(0)
 })
 

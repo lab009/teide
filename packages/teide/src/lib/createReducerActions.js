@@ -23,7 +23,7 @@ const createReducerActions = (o, ns) => {
 
       return prev
     },
-    {},
+    {}
   )
 }
 

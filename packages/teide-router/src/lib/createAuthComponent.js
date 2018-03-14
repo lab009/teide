@@ -33,6 +33,7 @@ export default (options) => {
   }
 
   class AuthComponent extends Component {
+    // eslint-disable-next-line no-undef
     static propTypes = {
       // eslint-disable-next-line react/forbid-prop-types, react/no-unused-prop-types
       location: PropTypes.object.isRequired,

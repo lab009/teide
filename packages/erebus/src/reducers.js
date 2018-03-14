@@ -19,18 +19,18 @@ const addEntities = (state, { meta: { forceUpdate }, payload: { normalized } }) 
   // TODO entity not work
   // return fromJS({ entities: normalized.entities }).mergeDeep(state)
   // return state.mergeDeep(fromJS({ entities: normalized.entities }))
-  if ( !forceUpdate ) return state.mergeDeep(fromJS({ entities: normalized.entities }))
+  if (!forceUpdate) return state.mergeDeep(fromJS({ entities: normalized.entities }))
 
   const entities = fromJS(normalized.entities)
 
   return state.withMutations((temporaryState) => {
-    entities.map( (entity, key) => {
+    entities.map((entity, key) =>
       temporaryState.setIn(['entities', key], entity)
-    })
+    )
   })
 }
 
-const deleteEntities = (state, { payload: { params, model }  }) => {
+const deleteEntities = (state, { payload: { params, model } }) => {
   if (!model) return state
 
   return state.deleteIn(['entities', model.key, params.get('id').toString()])
@@ -59,7 +59,7 @@ const setSubsetData = (state, { meta: { subset }, payload: { raw, normalized } }
       .set('data', fromJS(raw))
       .set('entities', normalized ? Set(ensureArray(normalized.result)) : Set())
       .set('pending', false)
-      .set('error', null),
+      .set('error', null)
   )
 }
 
@@ -71,6 +71,7 @@ const setSubsetError = (state, { meta: { subset }, payload }) => {
 }
 
 // exported actions
+// eslint-disable-next-line import/prefer-default-export
 export const api = handleActions(
   {
     // eslint-disable-line import/prefer-default-export
@@ -80,5 +81,5 @@ export const api = handleActions(
     'erebus.delete': deleteEntities,
     'erebus.reset': reset,
   },
-  initialState,
+  initialState
 )

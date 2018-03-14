@@ -5,7 +5,7 @@ import reduceReducers from 'reduce-reducers'
 const validateNextState = (nextState, reducerName, action) => {
   if (nextState === undefined) {
     throw new Error(
-      `Reducer "${reducerName}" returned undefined when handling "${action.type}" action. To ignore an action, you must explicitly return the previous state.`,
+      `Reducer "${reducerName}" returned undefined when handling "${action.type}" action. To ignore an action, you must explicitly return the previous state.`
     )
   }
 }

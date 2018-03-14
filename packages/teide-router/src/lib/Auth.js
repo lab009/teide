@@ -5,6 +5,7 @@ import { Component, PropTypes } from '@lab009/teide'
 import createAuthComponent from './createAuthComponent'
 
 export default class Auth extends Component {
+  // eslint-disable-next-line no-undef
   static propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object.isRequired,

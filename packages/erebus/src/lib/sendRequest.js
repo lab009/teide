@@ -26,7 +26,7 @@ const prepareOptions = ({ req, options }) => {
     req.auth(...options.auth)
   }
   if (options.responseType) {
-    req.responseType(options.responseType);
+    req.responseType(options.responseType)
   }
 }
 

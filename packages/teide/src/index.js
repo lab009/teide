@@ -11,6 +11,7 @@ import createReducerActions from './lib/createReducerActions'
 import combineReducers from './lib/combineReducers'
 
 class TeideComponent extends ReactComponent {
+  // eslint-disable-next-line no-undef
   static defaultState = {}
   constructor(...args) {
     super(...args)

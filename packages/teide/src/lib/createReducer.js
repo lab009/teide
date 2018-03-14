@@ -30,7 +30,7 @@ const getInitialState = (o, ns) =>
       }
       return prev
     },
-    o.initialState || Map(),
+    o.initialState || Map()
   )
 
 const createReducerNode = ({ name, statePath, reducer, initialState }) => (state, action = {}) => {
@@ -69,7 +69,7 @@ const createReducers = (o, parentName) => {
         return createReducer(v, name)
       }
     }),
-    isFunction,
+    isFunction
   )
 
   return {

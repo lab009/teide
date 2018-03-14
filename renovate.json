@@ -1,0 +1,13 @@
+
+{
+  "extends": [
+    "config:base",
+    ":maintainLockFilesWeekly",
+    ":prNotPending",
+    ":unpublishSafe"
+  ],
+  "pinVersions": false,
+  "excludedPackageNames": [
+    "gitbook-plugin-github"
+  ]
+}
