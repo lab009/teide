@@ -40,7 +40,7 @@
   "dependencies": {
     "immutable": "3.8.2",
     "invariant": "2.2.4",
-    "react-router": "2.8.1",
+    "react-router": "4.2.0",
     "react-router-redux": "3.0.0",
     "react-router-scroll": "0.3.3"
   },
