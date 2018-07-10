@@ -1,14 +1,13 @@
-import { Map } from 'immutable'
-
 import createReducerActions from '../createReducerActions'
 
+const counterReducer = {
+  initialState: { count: 1 },
+  increment: (state) => { state.count += 1 },
+  decrement: (state) => { state.count -= 1 },
+}
+
 it('should create actions for a flat reducer', () => {
-  const reducer = {
-    initialState: Map({ count: 1 }),
-    increment: state => state.update('count', v => v + 1),
-    decrement: state => state.update('count', v => v - 1),
-  }
-  const actions = createReducerActions(reducer)
+  const actions = createReducerActions(counterReducer)
 
   expect(actions.increment).toBeTruthy()
   expect(actions.decrement).toBeTruthy()
@@ -21,11 +20,7 @@ it('should create actions for a flat reducer', () => {
 
 it('should create actions for a nested reducer', () => {
   const reducer = {
-    counter: {
-      initialState: Map({ count: 1 }),
-      increment: state => state.update('count', v => v + 1),
-      decrement: state => state.update('count', v => v - 1),
-    },
+    counter: counterReducer,
   }
   const actions = createReducerActions(reducer)
 
@@ -41,11 +36,7 @@ it('should create actions for a nested reducer', () => {
 it('should create actions for a really nested reducer', () => {
   const reducer = {
     yo: {
-      counter: {
-        initialState: Map({ count: 1 }),
-        increment: state => state.update('count', v => v + 1),
-        decrement: state => state.update('count', v => v - 1),
-      },
+      counter: counterReducer,
     },
   }
   const actions = createReducerActions(reducer)

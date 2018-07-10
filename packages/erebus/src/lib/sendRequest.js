@@ -1,53 +1,74 @@
-import superagent from 'superagent'
+import request from 'superagent'
+import qs from 'qs'
 
-const prepareOptions = ({ req, options }) => {
-  if (options.type) {
-    req.type(options.type)
+import entify from './entify'
+
+const createResponseHandler = ({ options, dispatch, reject, resolve }) => {
+  const debug = `${options.method.toUpperCase()} ${options.endpoint}`
+  return (error, response) => {
+    if (!response && !error) {
+      error = new Error(`Connection failed: ${debug}`)
+    }
+    if (error) {
+      error.response = response
+      dispatch({
+        type: 'erebus.failure',
+        meta: options,
+        payload: error,
+      })
+      if (options.onError) options.onError(error, response)
+      return reject(error)
+    }
+
+    dispatch({
+      type: 'erebus.success',
+      meta: options,
+      payload: {
+        raw: response.body,
+        text: response.text,
+        normalized: options.model && entify(response.body, options),
+      },
+    })
+    if (options.onResponse) options.onResponse(response)
+    resolve(response)
   }
-  if (options.accept) {
-    req.accept(options.accept)
-  }
+}
+
+const sendRequest = async ({ options, dispatch, getState }) => {
+  dispatch({
+    type: 'erebus.request',
+    payload: options,
+  })
+
+  const req = request[options.method.toLowerCase()](options.endpoint)
   if (options.headers) {
     req.set(options.headers)
   }
-  if (options.field) {
-    req.field(options.field)
-  }
   if (options.query) {
-    req.query(options.query)
+    req.query(typeof options.query === 'string'
+      ? options.query
+      : qs.stringify(options.query, { strictNullHandling: true }))
   }
   if (options.body) {
     req.send(options.body)
   }
+  if (options.accept) {
+    req.accept(options.accept)
+  }
   if (options.withCredentials) {
     req.withCredentials()
   }
-  if (options.auth) {
-    req.auth(...options.auth)
+  if (options.onConfig) {
+    options.onConfig(req, { getState, options })
   }
-  if (options.responseType) {
-    req.responseType(options.responseType)
-  }
-}
 
-const checkResponce = ({ res, options }) => {
-  const debug = `${options.method.toUpperCase()} ${options.endpoint}`
-
-  if (!res) {
-    throw new Error(`Connection failed: ${debug}`)
-  }
-  // if (!res.noContent && res.type !== 'application/json') {
-  //   throw new Error(`Unknown response type: '${res.type}' from ${debug}`)
-  // }
-}
-
-const sendRequest = (options) => {
-  const req = superagent[options.method.toLowerCase()](options.endpoint)
-  prepareOptions({ req, options })
-
-  return req.then((res) => {
-    checkResponce({ res, options })
-    return res
+  return new Promise((resolve, reject) => {
+    req.end(createResponseHandler({
+      options,
+      dispatch,
+      reject,
+      resolve,
+    }))
   })
 }
 

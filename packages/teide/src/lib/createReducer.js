@@ -1,99 +1,97 @@
-import { handleAction } from 'redux-actions'
-import reduceReducers from 'reduce-reducers'
-import mapValues from 'lodash/mapValues'
-import values from 'lodash/values'
-import reduce from 'lodash/reduce'
-import filter from 'lodash/filter'
-import { Map, Iterable } from 'immutable'
+import { pipe, toPairs, reduce, values, filter, is, mapObjIndexed, lensPath, set, view, apply } from 'ramda'
+import compose from 'reduce-reducers'
+
+import handleAction from './handleAction'
 
 // terminology:
 // container - an object that contains initialState + reducer functions
 // initialState - the default state of a node and its children
 
-const isFunction = v => typeof v === 'function'
+const isFunction = is(Function)
 
-const getInitialState = (o, ns) =>
-  reduce(
-    o,
-    (prev, v, k) => {
-      if (k === 'initialState') return prev
-      const name = ns ? `${ns}.${k}` : k
+const getInitialState = (container, namespace) => {
+  const walker = pipe(
+    toPairs,
+    reduce((initialState, [key, value]) => {
+      if (key === 'initialState') return initialState
 
-      if (typeof v === 'object') {
-        if (!Map.isMap(prev)) {
-          throw new Error(`Reducer "${ns || 'root'}" has a non-map initialState, so it can't have children`)
+      if (typeof value === 'object') {
+        if (Array.isArray(initialState)) {
+          throw new Error(`Reducer "${namespace || 'root'}" has a non-object initialState, so it can't have children`)
         }
-        if (typeof prev.get(k) !== 'undefined') {
-          throw new Error(`Reducer "${ns || 'root'}" has an initialState conflict with it's parent over "${k}"`)
+        if (typeof initialState[key] !== 'undefined') {
+          throw new Error(`Reducer "${namespace || 'root'}" has an initialState conflict with it's parent over "${key}"`)
         }
-        return prev.set(k, getInitialState(v, name))
+        const name = namespace ? `${namespace}.${key}` : key
+        // eslint-disable-next-line no-param-reassign
+        initialState[key] = getInitialState(value, name)
       }
-      return prev
-    },
-    o.initialState || Map()
-  )
 
-const createReducerNode = ({ name, statePath, reducer, initialState }) => (state, action = {}) => {
+      return initialState
+    }, container.initialState || {})
+  )
+  return walker(container)
+}
+
+const createReducerNode = ({ statePath, reducer, initialState }) => (state, action = {}) => {
   // if we are the reducer container, pass them our cherry-picked state
   // otherwise pass down the full state to the next container
-  const currNodeState = (statePath ? state.getIn(statePath) : state) || initialState
-  if (!Iterable.isIterable(currNodeState)) {
-    throw new Error(`Reducer "${name || 'root'}" was given a non-Immutable state!`)
-  }
+  const statePathLens = statePath ? lensPath(statePath) : null
+
+  const currNodeState = (statePathLens ? view(statePathLens, state) : state) || initialState
   const nextNodeState = reducer(currNodeState, action)
-  if (!Iterable.isIterable(nextNodeState)) {
-    throw new Error(`Reducer "${name || 'root'}" returned a non-Immutable state!`)
-  }
-  const nextRootState = statePath ? state.setIn(statePath, nextNodeState) : nextNodeState
+  const nextRootState = statePathLens ? set(statePathLens, nextNodeState, state) : nextNodeState
 
   return nextRootState
 }
 
 // recursively map reducers object to an
 // array of reducers that handle namespaced actions
-const createReducers = (o, parentName) => {
+const createReducers = (container, namespace) => {
   let hadReducers = false
-  const reducers = filter(
-    mapValues(o, (v, k) => {
-      if (k === 'initialState') return
-      const name = parentName ? `${parentName}.${k}` : k
+  const walker = pipe(
+    mapObjIndexed((value, key) => {
+      if (key === 'initialState') return null
+      const name = namespace ? `${namespace}.${key}` : key
 
-      if (isFunction(v)) {
+      if (isFunction(value)) {
         hadReducers = true
-        // eslint-disable-next-line consistent-return
-        return handleAction(name, v, null)
+        return handleAction(name, value)
       }
 
-      if (typeof v === 'object') {
-        // eslint-disable-next-line no-use-before-define, consistent-return
-        return createReducer(v, name)
+      if (typeof value === 'object') {
+        // eslint-disable-next-line no-use-before-define
+        return createReducer(value, name)
       }
+
+      return null
     }),
-    isFunction
+    filter(isFunction)
   )
 
+  const reducers = walker(container)
+
   return {
-    name: parentName,
+    name: namespace,
     isContainer: hadReducers,
     reducers,
   }
 }
 
-const createReducer = (o, parentName) => {
-  const { reducers, isContainer, name } = createReducers(o, parentName)
-  if (isContainer && typeof o.initialState === 'undefined') {
+const createReducer = (container, namespace) => {
+  const { reducers, isContainer, name } = createReducers(container, namespace)
+
+  if (isContainer && typeof container.initialState === 'undefined') {
     throw new Error(`Reducer "${name || 'root'}" is missing an initialState`)
   }
-  if (!isContainer && typeof o.initialState !== 'undefined') {
+  if (!isContainer && typeof container.initialState !== 'undefined') {
     throw new Error(`Reducer "${name || 'root'}" has no reducers, so it can't specify an initialState`)
   }
-  const initialState = getInitialState(o)
-  if (!Iterable.isIterable(initialState)) {
-    throw new Error(`Reducer "${name || 'root'}" is missing an Immutable initialState`)
-  }
 
-  const reducer = reduceReducers(...values(reducers))
-  const statePath = name && isContainer ? name.split('.') : undefined
+  const initialState = getInitialState(container)
+  const reducer = apply(compose, values(reducers))
+  const statePath = name && isContainer ? name.split('.') : null
+
   return createReducerNode({
     name,
     initialState,

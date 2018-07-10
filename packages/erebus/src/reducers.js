@@ -1,11 +1,11 @@
 import { handleActions } from 'redux-actions'
-import { Map, Set, fromJS } from 'immutable'
+import { mergeDeepLeft, set, view, lensPath } from 'ramda'
 import compose from 'reduce-reducers'
 
-const initialState = Map({
-  subsets: Map(),
-  entities: Map(),
-})
+const initialState = {
+  subsets: {},
+  entities: {},
+}
 
 const ensureArray = data => (Array.isArray(data) ? data : [data])
 
@@ -16,24 +16,22 @@ const ensureArray = data => (Array.isArray(data) ? data : [data])
 // shallow entity state
 const addEntities = (state, { meta: { forceUpdate }, payload: { normalized } }) => {
   if (!normalized) return state
-  // TODO entity not work
-  // return fromJS({ entities: normalized.entities }).mergeDeep(state)
-  // return state.mergeDeep(fromJS({ entities: normalized.entities }))
-  if (!forceUpdate) return state.mergeDeep(fromJS({ entities: normalized.entities }))
+  const { entities } = normalized
 
-  const entities = fromJS(normalized.entities)
+  if (!forceUpdate) {
+    mergeDeepLeft({ entities }, state)
+    return
+  }
 
-  return state.withMutations((temporaryState) => {
-    entities.map((entity, key) =>
-      temporaryState.setIn(['entities', key], entity)
-    )
+  Object.keys(entities).forEach((key) => {
+    state.entities[key] = entities[key]
   })
 }
 
 const deleteEntities = (state, { payload: { params, model } }) => {
-  if (!model) return state
+  if (!model) return
 
-  return state.deleteIn(['entities', model.key, params.get('id').toString()])
+  delete state.entities[model.key][params.id]
 }
 
 const reset = () => initialState
@@ -41,43 +39,46 @@ const reset = () => initialState
 // subset state
 const createSubset = (state, { payload: { subset, fresh } }) => {
   if (!subset) return state
-  const path = ['subsets', subset]
-  if (!fresh && state.hasIn(path)) return state
-  const record = Map({
-    id: subset,
-    pending: true,
-  })
-  return state.setIn(path, record)
+  const subsetLens = lensPath(['subsets', subset])
+  if (!fresh && view(subsetLens, state)) return state
+  return set(subsetLens, { id: subset, pending: true }, state)
 }
 
-const setSubsetData = (state, { meta: { subset }, payload: { raw, normalized } }) => {
+const setSubsetData = (state, { meta: { subset }, payload: { raw, text, normalized } }) => {
   if (!subset) return state
-  const path = ['subsets', subset]
-  if (!state.hasIn(path)) return state // subset doesnt exist
-  return state.updateIn(path, subsetState =>
-    subsetState
-      .set('data', fromJS(raw))
-      .set('entities', normalized ? Set(ensureArray(normalized.result)) : Set())
-      .set('pending', false)
-      .set('error', null)
-  )
+  const subsetLens = lensPath(['subsets', subset])
+  if (!view(subsetLens, state)) return state // subset doesnt exist
+  return set(subsetLens, {
+    ...state.subsets[subset],
+    data: raw,
+    entities: normalized ? ensureArray(normalized.result) : null,
+    text,
+    pending: false,
+    error: null,
+  }, state)
 }
 
 const setSubsetError = (state, { meta: { subset }, payload }) => {
   if (!subset) return state
-  const path = ['subsets', subset]
-  if (!state.hasIn(path)) return state // subset doesnt exist
-  return state.updateIn(path, subsetState => subsetState.delete('data').delete('entities').set('error', payload).set('pending', false))
+  const subsetLens = lensPath(['subsets', subset])
+  if (!view(subsetLens, state)) return state // subset doesnt exist
+  return set(subsetLens, {
+    data: null,
+    entities: null,
+    text: null,
+    pending: false,
+    error: payload,
+  }, state)
 }
 
 // exported actions
 // eslint-disable-next-line import/prefer-default-export
 export const api = handleActions(
   {
-    // eslint-disable-line import/prefer-default-export
     'erebus.request': createSubset,
     'erebus.failure': setSubsetError,
-    'erebus.success': compose(setSubsetData, addEntities),
+    // 'erebus.success': compose(setSubsetData, addEntities),
+    'erebus.success': setSubsetData,
     'erebus.delete': deleteEntities,
     'erebus.reset': reset,
   },

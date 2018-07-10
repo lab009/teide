@@ -1,30 +1,28 @@
 import { createAction } from 'redux-actions'
-import reduce from 'lodash/reduce'
+import { pipe, toPairs, reduce } from 'ramda'
 
-const createReducerActions = (o, ns) => {
-  if (typeof o !== 'object') {
+const createReducerActions = (container, namespace) => {
+  if (typeof container !== 'object') {
     throw new Error('Passed an invalid reducer config - must be an object')
   }
-  return reduce(
-    o,
-    (prev, v, k) => {
-      if (k === 'initialState') return prev
-      const name = ns ? `${ns}.${k}` : k
 
-      if (typeof v === 'function') {
-        prev[k] = createAction(name)
-        return prev
+  const walker = pipe(
+    toPairs,
+    reduce((actions, [key, value]) => {
+      if (key === 'initialState') return actions
+
+      const name = namespace ? `${namespace}.${key}` : key
+      if (typeof value === 'function') {
+        actions[key] = createAction(name)
+      }
+      if (typeof value === 'object') {
+        actions[key] = createReducerActions(value, name)
       }
 
-      if (typeof v === 'object') {
-        prev[k] = createReducerActions(v, name)
-        return prev
-      }
-
-      return prev
-    },
-    {}
+      return actions
+    }, {})
   )
+  return walker(container)
 }
 
 export default createReducerActions

@@ -1,67 +1,67 @@
-import reduce from 'lodash/reduce'
+import { pipe, toPairs, reduce } from 'ramda'
 
-export default (plugins) => {
-  if (!Array.isArray(plugins)) throw new Error('Invalid plugins argument')
-  return reduce(
-    plugins,
-    (p, v, k) => {
-      if (typeof v !== 'object') {
-        throw new Error(`Invalid export in plugin ${k}`)
-      }
+const processPlugins = pipe(
+  toPairs,
+reduce((acc, [name, plugin]) => {
+  if (typeof plugin !== 'object') {
+    throw new Error(`Invalid export plugin ${name}`)
+  }
 
-      // grab the reducer out of it
-      if (typeof v.reducer === 'function') {
-        p.reducers.push(v.reducer)
-      } else if (typeof v.reducer !== 'undefined') {
-        throw new Error(`Invalid "reducer" export in plugin ${k}`)
-      }
+  // grab the reducer out of it
+  if (typeof plugin.reducer === 'function') {
+    acc.reducers.push(plugin.reducer)
+  } else if (typeof plugin.reducer !== 'undefined') {
+    throw new Error(`Invalid "reducer" export in plugin ${name}`)
+  }
 
-      if (Array.isArray(v.reducers)) {
-        p.reducers = p.reducers.concat(v.reducers)
-      } else if (typeof v.reducers === 'object') {
-        p.reducers.push(v.reducers)
-      }
+  if (Array.isArray(plugin.reducers)) {
+    acc.reducers = acc.reducers.concat(plugin.reducers)
+  } else if (typeof plugin.reducers === 'object') {
+    acc.reducers.push(plugin.reducers)
+  }
 
-      // grab any middleware
-      if (typeof v.middleware === 'function') {
-        p.middleware.push(v.middleware)
-      } else if (Array.isArray(v.middleware)) {
-        p.middleware = p.middleware.concat(v.middleware)
-      } else if (typeof v.middleware !== 'undefined') {
-        throw new Error(`Invalid "middleware" export in plugin ${k}`)
-      }
+  // grab any middleware
+  if (typeof plugin.middleware === 'function') {
+    acc.middleware.push(plugin.middleware)
+  } else if (Array.isArray(plugin.middleware)) {
+    acc.middleware = acc.middleware.concat(plugin.middleware)
+  } else if (typeof plugin.middleware !== 'undefined') {
+    throw new Error(`Invalid "middleware" export in plugin ${name}`)
+  }
 
-      // grab any enhancers
-      if (typeof v.enhancer === 'function') {
-        p.enhancers.push(v.enhancer)
-      } else if (typeof v.enhancer !== 'undefined') {
-        throw new Error(`Invalid "enhancer" export in plugin ${k}`)
-      }
-      if (Array.isArray(v.enhancers)) {
-        p.enhancers = p.enhancers.concat(v.enhancers)
-      } else if (typeof v.enhancers !== 'undefined') {
-        throw new Error(`Invalid "enhancers" export in plugin ${k}`)
-      }
+  // grab any enhancers
+  if (typeof plugin.enhancer === 'function') {
+    acc.enhancers.push(plugin.enhancer)
+  } else if (typeof plugin.enhancer !== 'undefined') {
+    throw new Error(`Invalid "enhancer" export in plugin ${name}`)
+  }
+  if (Array.isArray(plugin.enhancers)) {
+    acc.enhancers = acc.enhancers.concat(plugin.enhancers)
+  } else if (typeof plugin.enhancers !== 'undefined') {
+    throw new Error(`Invalid "enhancers" export in plugin ${name}`)
+  }
 
-      // grab any hooks
-      if (typeof v.hook === 'function') {
-        p.hooks.push(v.hook)
-      } else if (typeof v.hook !== 'undefined') {
-        throw new Error(`Invalid "hook" export in plugin ${k}`)
-      }
-      if (Array.isArray(v.hooks)) {
-        p.hooks = p.enhancers.concat(v.hooks)
-      } else if (typeof v.hooks !== 'undefined') {
-        throw new Error(`Invalid "hooks" export in plugin ${k}`)
-      }
+  // grab any hooks
+  if (typeof plugin.hook === 'function') {
+    acc.hooks.push(plugin.hook)
+  } else if (typeof plugin.hook !== 'undefined') {
+    throw new Error(`Invalid "hook" export in plugin ${name}`)
+  }
+  if (Array.isArray(plugin.hooks)) {
+    acc.hooks = acc.enhancers.concat(plugin.hooks)
+  } else if (typeof plugin.hooks !== 'undefined') {
+    throw new Error(`Invalid "hooks" export in plugin ${name}`)
+  }
 
-      return p
-    },
-    {
-      reducers: [],
-      middleware: [],
-      enhancers: [],
-      hooks: [],
-    }
-  )
-}
+  return acc
+},
+  {
+    reducers: [],
+    middleware: [],
+    enhancers: [],
+    hooks: [],
+  }
+)
+)
+
+export default processPlugins

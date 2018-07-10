@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'
-import mapValues from 'lodash/mapValues'
+import { map } from 'ramda'
 
 // equiv of redux createAction but recursive
 
@@ -13,8 +13,7 @@ const createActions = (actions, dispatch) => {
   if (typeof actions === 'function') {
     const fn = (...args) => {
       const action = actions(...args)
-      dispatch(action)
-      return action
+      return dispatch(action) || action
     }
     // Copy meta
     Object.keys(actions).forEach((k) => {
@@ -24,7 +23,7 @@ const createActions = (actions, dispatch) => {
   }
 
   // iterate through objects and do mapping
-  return mapValues(actions, action => createActions(action, dispatch))
+  return map(action => createActions(action, dispatch), actions)
 }
 
 export default createActions

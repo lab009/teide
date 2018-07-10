@@ -1,5 +1,5 @@
 import { Component } from '@lab009/teide'
-import { fromJS, Iterable, List, Map } from 'immutable'
+import { isEmpty } from 'ramda'
 
 export default class DataComponent extends Component {
   constructor(...args) {
@@ -24,25 +24,32 @@ export default class DataComponent extends Component {
   }
 
   getResolvingFields() {
-    // has keys that are either undefined/null or have a pending = true key
-    return fromJS(this.constructor.storeProps).reduce((prev, cursor, prop) => (
-      this.isPropResolving(prop) ? prev.push(prop) : prev), List()
+    // has keys that are either undefined or have a pending = true key
+    return Object.keys(this.constructor.storeProps).reduce((fields, prop) => (
+      this.isPropResolving(prop) ? [...fields, prop] : fields), []
     )
   }
 
   getErrors() {
     // has keys that have an error = data key
-    return fromJS(this.constructor.storeProps).reduce(
-      (prev, cursor, prop) => (this.isPropErrored(prop) ? prev.set(prop, this.props[prop].get('error')) : prev),
-      Map()
+    return Object.keys(this.constructor.storeProps).reduce(
+      (errors, prop) => (
+        this.isPropErrored(prop) ? { ...errors, [prop]: this.props[prop].error } : errors
+      ),
+      {}
     )
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  getData(value) {
+    return value.data ? value.data || value : value
   }
 
   getResolvedData() {
     return Object.keys(this.constructor.storeProps).reduce((prev, prop) => {
       const val = this.props[prop]
       if (!this.isPropResolving(prop)) {
-        prev[prop] = Iterable.isIterable(val) ? val.get('data') || val : val
+        prev[prop] = this.getData(val)
       }
       return prev
     }, {})
@@ -56,19 +63,19 @@ export default class DataComponent extends Component {
   }
 
   isPropResolving(prop) {
-    return typeof this.props[prop] === 'undefined' || (Iterable.isIterable(this.props[prop]) && this.props[prop].get('pending') === true)
+    return typeof this.props[prop] === 'undefined' || (this.props[prop].pending && this.props[prop].pending === true)
   }
 
   isPropErrored(prop) {
-    return Iterable.isIterable(this.props[prop]) && this.props[prop].get('error') != null
+    return this.props[prop] != null && this.props[prop].error && this.props[prop].error != null
   }
 
   isResolving() {
-    return !this.isErrored() && !this.getResolvingFields().isEmpty()
+    return !this.isErrored() && !isEmpty(this.getResolvingFields())
   }
 
   isErrored() {
-    return !this.getErrors().isEmpty()
+    return !isEmpty(this.getErrors())
   }
 
   // eslint-disable-next-line class-methods-use-this

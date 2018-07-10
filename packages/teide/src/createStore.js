@@ -1,19 +1,14 @@
-import { applyMiddleware, compose, createStore } from 'redux'
-import { Map, Iterable } from 'immutable'
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction'
 import thunk from 'redux-thunk'
-import each from 'lodash/forEach'
-import { batchedSubscribe } from 'redux-batched-subscribe'
-import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
+import { forEach } from 'ramda'
 
 import combineReducers from './lib/combineReducers'
 import transformPlugins from './lib/transformPlugins'
 
-// If Redux DevTools Extension is installed use it, otherwise use Redux compose
-const composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  : compose
+// If Redux DevTools Extension is installed use it
+const composeEnhancers = composeWithDevTools
 
-const defaultEnhancers = [batchedSubscribe(batchedUpdates)]
 const defaultMiddleware = [thunk]
 
 export default ({
@@ -22,18 +17,18 @@ export default ({
   enhancers = [],
   reducers = [],
   hooks = [],
-  initialState = Map(),
+  initialState = {},
 }) => {
   if (!Array.isArray(reducers)) throw new Error('Invalid reducers option')
   if (!Array.isArray(middleware)) throw new Error('Invalid middleware option')
   if (!Array.isArray(enhancers)) throw new Error('Invalid enhancers option')
-  if (!Iterable.isIterable(initialState)) throw new Error('Invalid initialState option')
+  if (!Array.isArray(plugins)) throw new Error('Invalid plugins argument')
 
   // take in the options and reconcile them with the plugins provided
   const pluginValues = transformPlugins(plugins)
   const finalReducers = [...reducers, ...pluginValues.reducers]
   const finalMiddleware = [...defaultMiddleware, ...middleware, ...pluginValues.middleware]
-  const finalEnhancers = [...defaultEnhancers, ...enhancers, ...pluginValues.enhancers]
+  const finalEnhancers = [...enhancers, ...pluginValues.enhancers]
   const finalHooks = [...hooks, ...pluginValues.hooks]
 
   const store = createStore(
@@ -48,7 +43,7 @@ export default ({
   }
 
   // apply hooks
-  each(finalHooks, fn => fn(store))
+  forEach(hook => hook(store), finalHooks)
 
   return store
 }

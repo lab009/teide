@@ -1,11 +1,12 @@
-import mapValues from 'lodash/mapValues'
+import { map, path } from 'ramda'
 
 // supports array of strings, strings with dot, or function
-const lookup = (o, k, args) => {
-  if (typeof k === 'function') return k(...args)
-  if (typeof k === 'string') return o.getIn(k.split('.'))
-  if (Array.isArray(k)) return o.getIn(k)
-  throw new Error(`Unknown lookup key: ${k}`)
+const lookup = (state, key, args) => {
+  if (typeof key === 'function') return key(...args)
+  if (typeof key === 'string') return path(key.split('.'), state)
+  if (Array.isArray(key)) return path(key, state)
+
+  throw new Error(`Unknown lookup key: ${key}`)
 }
 
 // takes an object where key is anything you want
@@ -16,4 +17,4 @@ const lookup = (o, k, args) => {
 // it will then dive into an immutable object and grab all of these storeProps
 // and return the same object, but where the values are the resolved data
 export default (storeProps, storeState, props) =>
-  mapValues(storeProps, v => lookup(storeState, v, [storeState, props]))
+  map(value => lookup(storeState, value, [storeState, props]), storeProps)

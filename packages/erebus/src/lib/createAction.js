@@ -1,9 +1,6 @@
-import mapValues from 'lodash/mapValues'
-import merge from 'lodash/merge'
-import handleAction from './handleAction'
+import { mergeDeepLeft, mapObjIndexed } from 'ramda'
 
-const reserved = ['onResponse', 'onError']
-const result = (fn, ...arg) => (typeof fn === 'function' ? fn(...arg) : fn)
+import sendRequest from './sendRequest'
 
 // TODO: check entities cache in store and dont fetch if we have it already
 
@@ -13,70 +10,62 @@ const result = (fn, ...arg) => (typeof fn === 'function' ? fn(...arg) : fn)
 
  - onError (optional)(function)
  - onResponse (optional)(function)
+ - onConfig (optional)(function)
 
- - subset (optional)(string)
+ - endpoint (required)(url string)
  - method (required)(get, post, put, delete, or patch)
  - params (object)
- - endpoint (required)(url string)
+ - subset (optional)(string)
  - model (optional)(normalizr model)
  - collection (default false)(boolean)
  - fresh (default to false)(boolean)
+ - forceUpdate (default to false)(boolean)
 
  - headers (optional)(object)
- - field (optional)(object)
  - query (optional)(object)
  - body (optional)(object)
+ - accept (optional)(string)
  - withCredentials (default false)(boolean)
- - token (optional)(string)
- - locale (optional)(string)
- - auth (optional)(array)
- - type (optional)(string)
-
 
  all options can either be a value, or a function that returns a value.
  if you define a function, it will receive options.params as an argument
- */
 
-const isReserved = k => reserved.indexOf(k) !== -1
-const noop = () => {}
-
-/*
- merge our multitude of option objects together
+merge our multitude of option objects together
  defaults = options defined in createAction
  opt = options specified in action creator
- state = current state of store
  */
-export const mergeOptions = (defaults, opt, state) =>
-  mapValues(merge({}, defaults, opt), (v, k, { params = {} }) => {
-    if (isReserved(k)) return v
-    return result(v, params, state)
-  })
 
-const createAction = (defaults = {}) => (opt = {}) => (dispatch, getState) => {
-  const options = mergeOptions(defaults, opt, getState())
+const reserved = ['onResponse', 'onError', 'onConfig']
+const result = (value, ...arg) => (typeof value === 'function' ? value(...arg) : value)
+const isReserved = option => reserved.indexOf(option) !== -1
+const resolveFunctions = (options, params) => mapObjIndexed(
+  (value, option) => {
+    if (isReserved(option)) return value
+    return result(value, params)
+  },
+  options
+)
 
-  if (!options.method) throw new Error('Missing method')
-  if (!options.endpoint) throw new Error('Missing endpoint')
+export const mergeOptions = (defaults, opt) => {
+  const defaultParams = defaults.params ? result(defaults.params) : {}
+  const optParams = opt.params ? result(opt.params) : {}
+  const params = mergeDeepLeft(optParams, defaultParams)
+  return mergeDeepLeft(resolveFunctions(opt, params), resolveFunctions(defaults, params))
+}
 
-  const reqPromise = handleAction({ options, dispatch })
-  reqPromise.catch(noop)
+const createAction = (defaults = {}) => {
+  const createRequest = (opt = {}) => {
+    const options = mergeOptions(defaults, opt)
 
-  if (options.onResponse) reqPromise.then(options.onResponse, noop)
-  if (options.onError) reqPromise.catch(err => options.onError(err, err.response))
+    if (!options.method) throw new Error('Missing method')
+    if (!options.endpoint) throw new Error('Missing endpoint')
 
-  const actionPromise = noop
-
-  actionPromise.then = function _then(resolve, reject) {
-    return reqPromise.then(resolve, reject)
+    const action = async (dispatch, getState) => sendRequest({ options, dispatch, getState })
+    action.options = options
+    return action
   }
-
-  actionPromise.catch = function _catch(cb) {
-    return this.then(undefined, cb)
-  }
-
-  actionPromise.options = options
-
-  return actionPromise
+  createRequest.options = defaults
+  return createRequest
 }
 
 export default createAction

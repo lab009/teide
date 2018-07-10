@@ -10,6 +10,20 @@
       "presets": [
         "@lab009/babel-preset-magma"
       ]
+    },
+
+    "es2": {
+      "presets": [
+        ["@lab009/babel-preset-magma", {"useBuiltIns": "entry", "targets": {
+          "browsers": [
+          "last 2 Chrome versions",
+          "last 2 Firefox versions",
+          "last 2 Edge versions",
+          "last 2 Opera versions",
+          "last 2 Safari versions",
+          "last 2 iOS versions"
+        ]}}]
+      ]
     }
   }
 }

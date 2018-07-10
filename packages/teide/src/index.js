@@ -1,7 +1,6 @@
 import { Component as ReactComponent } from 'react'
-import RPropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import IPropTypes from 'react-immutable-proptypes'
+
 import bindClass from './lib/bindClass'
 import connect from './lib/connect'
 import createStore from './createStore'
@@ -23,15 +22,9 @@ class TeideComponent extends ReactComponent {
   }
 }
 
-const PropTypes = {
-  ...IPropTypes,
-  ...RPropTypes,
-}
-
 export {
   TeideComponent as Component,
   connect,
-  PropTypes,
   Provider,
   combineReducers,
   createReducer,

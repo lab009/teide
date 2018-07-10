@@ -1,6 +1,9 @@
-import Immutable from 'immutable'
-import map from 'lodash/map'
-import reduceReducers from 'reduce-reducers'
+import { map } from 'ramda'
+import compose from 'reduce-reducers'
+
+import produce from './produce'
+
+const createEmptyObject = () => ({})
 
 const validateNextState = (nextState, reducerName, action) => {
   if (nextState === undefined) {
@@ -10,23 +13,24 @@ const validateNextState = (nextState, reducerName, action) => {
   }
 }
 
-const combineReducers = (reducers, getDefaultState = Immutable.Map) => {
+const combineReducers = (reducers, getDefaultState = createEmptyObject) => {
   const reducerKeys = Object.keys(reducers)
 
   return (inputState = getDefaultState(), action) =>
-    inputState.withMutations((temporaryState) => {
+    produce(reducerKeys.join('|'), inputState, (draft) => {
       reducerKeys.forEach((reducerName) => {
         const reducer = reducers[reducerName]
-        const currentDomainState = temporaryState.get(reducerName)
+        const currentDomainState = draft[reducerName]
         const nextDomainState = reducer(currentDomainState, action)
 
         validateNextState(nextDomainState, reducerName, action)
 
-        temporaryState.set(reducerName, nextDomainState)
+        draft[reducerName] = nextDomainState
       })
     })
 }
 
-const combine = (...reducers) => reduceReducers(...map(reducers, v => (typeof v === 'function' ? v : combineReducers(v))))
+const combine = (...reducers) =>
+  compose(...map(v => (typeof v === 'function' ? v : combineReducers(v)), reducers))
 
 export default combine

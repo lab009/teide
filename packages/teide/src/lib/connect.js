@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+
 import resolve from './resolveStoreProps'
 
 const mapStateToProps = storeProps => (storeState, ownProps) =>
