@@ -1,6 +1,7 @@
 import request from 'superagent'
 import qs from 'qs'
 
+import { REQUEST, FAILURE, SUCCESS } from '../types'
 import entify from './entify'
 
 const createResponseHandler = ({ options, dispatch, reject, resolve }) => {
@@ -12,16 +13,17 @@ const createResponseHandler = ({ options, dispatch, reject, resolve }) => {
     if (error) {
       error.response = response
       dispatch({
-        type: 'erebus.failure',
+        type: FAILURE,
         meta: options,
         payload: error,
       })
       if (options.onError) options.onError(error, response)
+      if (options.onFinal) options.onFinal(error, response)
       return reject(error)
     }
 
     dispatch({
-      type: 'erebus.success',
+      type: SUCCESS,
       meta: options,
       payload: {
         raw: response.body,
@@ -30,13 +32,14 @@ const createResponseHandler = ({ options, dispatch, reject, resolve }) => {
       },
     })
     if (options.onResponse) options.onResponse(response)
+    if (options.onFinal) options.onFinal(null, response)
     resolve(response)
   }
 }
 
 const sendRequest = async ({ options, dispatch, getState }) => {
   dispatch({
-    type: 'erebus.request',
+    type: REQUEST,
     payload: options,
   })
 

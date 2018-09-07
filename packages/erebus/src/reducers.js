@@ -2,6 +2,8 @@ import { handleActions } from 'redux-actions'
 import { mergeDeepLeft, set, view, lensPath } from 'ramda'
 import compose from 'reduce-reducers'
 
+import { REQUEST, FAILURE, SUCCESS, DELETE, RESET } from './types'
+
 const initialState = {
   subsets: {},
   entities: {},
@@ -75,12 +77,12 @@ const setSubsetError = (state, { meta: { subset }, payload }) => {
 // eslint-disable-next-line import/prefer-default-export
 export const api = handleActions(
   {
-    'erebus.request': createSubset,
-    'erebus.failure': setSubsetError,
-    // 'erebus.success': compose(setSubsetData, addEntities),
-    'erebus.success': setSubsetData,
-    'erebus.delete': deleteEntities,
-    'erebus.reset': reset,
+    [REQUEST]: createSubset,
+    [FAILURE]: setSubsetError,
+    // [SUCCESS]: compose(setSubsetData, addEntities),
+    [SUCCESS]: setSubsetData,
+    [DELETE]: deleteEntities,
+    [RESET]: reset,
   },
   initialState
 )

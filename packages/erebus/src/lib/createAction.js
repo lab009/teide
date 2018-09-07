@@ -10,6 +10,7 @@ import sendRequest from './sendRequest'
 
  - onError (optional)(function)
  - onResponse (optional)(function)
+ - onFinal (optional)(function)
  - onConfig (optional)(function)
 
  - endpoint (required)(url string)
@@ -35,7 +36,7 @@ merge our multitude of option objects together
  opt = options specified in action creator
  */
 
-const reserved = ['onResponse', 'onError', 'onConfig']
+const reserved = ['onResponse', 'onError', 'onFinal', 'onConfig']
 const result = (value, ...arg) => (typeof value === 'function' ? value(...arg) : value)
 const isReserved = option => reserved.indexOf(option) !== -1
 const resolveFunctions = (options, params) => mapObjIndexed(

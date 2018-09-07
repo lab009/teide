@@ -1,0 +1,5 @@
+export const REQUEST = 'erebus.request'
+export const FAILURE = 'erebus.failure'
+export const SUCCESS = 'erebus.success'
+export const DELETE = 'erebus.delete'
+export const RESET = 'erebus.reset'
