@@ -42,7 +42,7 @@
     "invariant": "2.2.4",
     "react-router": "2.8.1",
     "react-router-redux": "3.0.0",
-    "react-router-scroll": "0.3.3"
+    "react-router-scroll": "0.4.4"
   },
   "devDependencies": {
     "@lab009/babel-preset-magma": "3.4.3",

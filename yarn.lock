@@ -1904,9 +1904,9 @@ doctrine@^2.0.0, doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-dom-helpers@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-2.4.0.tgz#9bb4b245f637367b1fa670274272aa28fe06c367"
+dom-helpers@^3.2.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
 dom-serializer@0, dom-serializer@~0.1.0:
   version "0.1.0"
@@ -5256,12 +5256,12 @@ react-router-redux@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-3.0.0.tgz#1962905f83eae8c75ff32160eed773dd50794230"
 
-react-router-scroll@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/react-router-scroll/-/react-router-scroll-0.3.3.tgz#e57200fd863e728fce8e90be933f5315990fc0e6"
+react-router-scroll@0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/react-router-scroll/-/react-router-scroll-0.4.4.tgz#4d7b71c75b45ff296e4adca1e029a86e898a155d"
   dependencies:
-    history "^2.1.2"
-    scroll-behavior "^0.8.0"
+    prop-types "^15.6.0"
+    scroll-behavior "^0.9.5"
     warning "^3.0.0"
 
 react-router@2.8.1:
@@ -5775,12 +5775,12 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scroll-behavior@^0.8.0:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.8.2.tgz#ace13e40b001d8d4d007aec0e7fb668cf9043546"
+scroll-behavior@^0.9.5:
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.9.9.tgz#ebfe0658455b82ad885b66195215416674dacce2"
   dependencies:
-    dom-helpers "^2.4.0"
-    invariant "^2.2.1"
+    dom-helpers "^3.2.1"
+    invariant "^2.2.2"
 
 semver-compare@^1.0.0:
   version "1.0.0"
